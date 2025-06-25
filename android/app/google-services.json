@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "113975548809",
+    "project_id": "wedive-8588c",
+    "storage_bucket": "wedive-8588c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113975548809:android:82db5ec71644ea37d4df58",
+        "android_client_info": {
+          "package_name": "com.example.wedive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113975548809-1ma8qqq3hijubsgt7epbonktlkfqcfbj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wedive",
+            "certificate_hash": "edc91d4a863b56fdd6eda3870dedb5eb8227be35"
+          }
+        },
+        {
+          "client_id": "113975548809-f3rtocdanmj5783ln4e4e3c7hl3pg22l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZKT4ub0iz8XeUD6FigD9raJOq5j3e5Is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113975548809-f3rtocdanmj5783ln4e4e3c7hl3pg22l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "113975548809-gm6i76132lh23c6fgt0mnmjeocdit5ok.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wedive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
