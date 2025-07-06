@@ -18,7 +18,7 @@ class WediveElevatedButtonTheme {
   static ElevatedButtonThemeData darkElevatedButtonTheme =
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: WediveColorsTheme.primaryBlue, // Main primary
+          backgroundColor: WediveColorsTheme.secondaryBlue, // Main primary
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

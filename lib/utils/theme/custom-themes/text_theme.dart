@@ -14,7 +14,7 @@ class WediveTextTheme {
     headlineMedium: GoogleFonts.montserrat(
       color: WediveColorsTheme.textBlack,
       fontSize: 24,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
     ),
     headlineSmall: GoogleFonts.montserrat(
       color: WediveColorsTheme.textBlack,
@@ -27,7 +27,7 @@ class WediveTextTheme {
       fontWeight: FontWeight.w500,
     ),
     bodyMedium: GoogleFonts.montserrat(
-      color: WediveColorsTheme.textBlack,
+      color: WediveColorsTheme.textGrey,
       fontSize: 16,
       fontWeight: FontWeight.normal,
     ),

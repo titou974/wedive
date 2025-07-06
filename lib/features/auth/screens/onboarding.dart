@@ -1,3 +1,5 @@
+import 'package:Wedive/features/auth/controllers/onboarding_controller.dart';
+import 'package:Wedive/features/auth/screens/widgets/onboarding_button.dart';
 import 'package:Wedive/features/auth/screens/widgets/onboarding_dots.dart';
 import 'package:Wedive/features/auth/screens/widgets/onboarding_logo.dart';
 import 'package:Wedive/features/auth/screens/widgets/onboarding_page.dart';
@@ -5,16 +7,21 @@ import 'package:Wedive/features/auth/screens/widgets/onboarding_skip.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnBoardingController());
+
     return Scaffold(
       body: Stack(
         children: [
           PageView(
+            controller: controller.pageController,
+            onPageChanged: controller.updatePageIndicator,
             children: [
               OnBoardingPage(
                 image: WediveImages.bottleDiverWoman,
@@ -36,6 +43,7 @@ class OnBoardingScreen extends StatelessWidget {
           AppLogo(),
           OnBoardingSkip(),
           OnBoardingDots(),
+          CircleArrowButton(),
         ],
       ),
     );

@@ -20,6 +20,8 @@ class WediveColorsTheme {
   static const Color backgroundWhite = Color(0xFFFDFDFD);
   static const Color textBlack = Colors.black; // Main text color
   static const Color textWhite = Colors.white; // Main text color for dark model
+
+  static const Color textGrey = Color(0xFF616161); // Secondary text color
   static const Color transparent = Colors.transparent; // Transparent color
   static const Color errorRed = Colors.red;
 }
