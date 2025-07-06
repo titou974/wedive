@@ -1,3 +1,3 @@
 class APIConstants {
-  static const String WediveApiKey = "WediveApiKey";
+  static const String wediveApiKey = "WediveApiKey";
 }

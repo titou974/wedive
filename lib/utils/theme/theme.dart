@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:wedive/utils/theme/custom-themes/text_theme.dart';
-import 'package:wedive/utils/theme/custom-themes/elevated_button_theme.dart';
-import 'package:wedive/utils/theme/custom-themes/color_scheme.dart';
-import 'package:wedive/utils/theme/custom-themes/outlined_button_theme.dart';
-import 'package:wedive/utils/constants/colors.dart';
-import 'package:wedive/utils/theme/custom-themes/appbar_theme.dart';
-import 'package:wedive/utils/theme/custom-themes/checkbox_theme.dart';
-import 'package:wedive/utils/theme/custom-themes/bottom_sheet_theme.dart';
-import 'package:wedive/utils/theme/custom-themes/text_field_theme.dart';
+import 'custom-themes/text_theme.dart';
+import 'custom-themes/elevated_button_theme.dart';
+import 'custom-themes/color_scheme.dart';
+import 'custom-themes/outlined_button_theme.dart';
+import '../constants/colors.dart';
+import 'custom-themes/appbar_theme.dart';
+import 'custom-themes/checkbox_theme.dart';
+import 'custom-themes/bottom_sheet_theme.dart';
+import 'custom-themes/text_field_theme.dart';
 
 class WediveTheme {
   WediveTheme._();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wedive/utils/constants/colors.dart';
+import '../../constants/colors.dart';
 
 class WediveColorScheme {
   WediveColorScheme._();

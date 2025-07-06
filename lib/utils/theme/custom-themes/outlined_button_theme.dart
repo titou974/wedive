@@ -1,5 +1,5 @@
+import 'package:Wedive/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:wedive/utils/constants/colors.dart';
 
 class WediveOutlinedButtonTheme {
   WediveOutlinedButtonTheme._();
