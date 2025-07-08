@@ -8,4 +8,6 @@ class WediveImages {
   static const String bottleDiverWoman = "assets/images/bottlediverwoman.svg";
   static const String kayakCouple = "assets/images/kayakcouple.svg";
   static const String seaPollution = "assets/images/seapollution.svg";
+
+  static const String sea = "assets/images/sea.svg";
 }

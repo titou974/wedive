@@ -6,6 +6,16 @@ class WediveTextTheme {
   WediveTextTheme._();
 
   static TextTheme lightTextTheme = GoogleFonts.montserratTextTheme().copyWith(
+    titleLarge: GoogleFonts.montserrat(
+      color: WediveColorsTheme.textBlack,
+      fontSize: 32,
+      fontWeight: FontWeight.w600,
+    ),
+    titleMedium: GoogleFonts.montserrat(
+      color: WediveColorsTheme.textBlack,
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+    ),
     headlineLarge: GoogleFonts.montserrat(
       color: WediveColorsTheme.textBlack,
       fontSize: 32,
@@ -38,7 +48,7 @@ class WediveTextTheme {
     ),
     labelLarge: GoogleFonts.montserrat(
       fontSize: 12.0,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w600,
       color: WediveColorsTheme.textBlack,
     ),
     labelMedium: GoogleFonts.montserrat(

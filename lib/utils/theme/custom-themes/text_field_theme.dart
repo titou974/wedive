@@ -5,13 +5,12 @@ class WediveTextFieldTheme {
   WediveTextFieldTheme._();
 
   static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
+    filled: true,
+    fillColor: Colors.grey.shade100, // Choose your preferred color
     errorMaxLines: 3,
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
-    labelStyle: TextStyle().copyWith(
-      fontSize: 14,
-      color: WediveColorsTheme.textBlack,
-    ),
+    labelStyle: TextStyle().copyWith(fontSize: 14, color: Colors.grey),
     hintStyle: TextStyle().copyWith(
       fontSize: 14,
       color: WediveColorsTheme.textBlack,
@@ -22,27 +21,29 @@ class WediveTextFieldTheme {
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
+      borderSide: BorderSide.none, // No outline
     ),
-    enabledBorder: OutlineInputBorder().copyWith(
+    enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(width: 1.0, color: Colors.grey),
+      borderSide: BorderSide.none,
     ),
-    focusedBorder: OutlineInputBorder().copyWith(
+    focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(width: 1, color: Colors.black12),
+      borderSide: BorderSide.none,
     ),
-    errorBorder: OutlineInputBorder().copyWith(
+    errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
       borderSide: BorderSide(color: WediveColorsTheme.errorRed, width: 1.0),
     ),
-    focusedErrorBorder: OutlineInputBorder().copyWith(
+    focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
       borderSide: BorderSide(color: Colors.orange, width: 2.0),
     ),
   );
 
   static InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
+    filled: true,
+    fillColor: Colors.grey.shade800, // Choose your preferred dark color
     errorMaxLines: 3,
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
@@ -60,21 +61,21 @@ class WediveTextFieldTheme {
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
+      borderSide: BorderSide.none,
     ),
-    enabledBorder: OutlineInputBorder().copyWith(
+    enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(width: 1.0, color: Colors.grey),
+      borderSide: BorderSide.none,
     ),
-    focusedBorder: OutlineInputBorder().copyWith(
+    focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(width: 1, color: Colors.black12),
+      borderSide: BorderSide.none,
     ),
-    errorBorder: OutlineInputBorder().copyWith(
+    errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
       borderSide: BorderSide(color: WediveColorsTheme.errorRed, width: 1.0),
     ),
-    focusedErrorBorder: OutlineInputBorder().copyWith(
+    focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
       borderSide: BorderSide(color: Colors.orange, width: 2.0),
     ),

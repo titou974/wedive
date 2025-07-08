@@ -9,6 +9,8 @@ class WediveElevatedButtonTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: WediveColorsTheme.primaryBlue,
           foregroundColor: Colors.white,
+          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -20,6 +22,8 @@ class WediveElevatedButtonTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: WediveColorsTheme.secondaryBlue, // Main primary
           foregroundColor: Colors.white,
+          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

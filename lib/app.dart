@@ -1,4 +1,4 @@
-import 'package:Wedive/features/auth/screens/onboarding.dart';
+import 'package:Wedive/features/auth/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:Wedive/utils/theme/theme.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,5 @@
 class WediveTextsFr {
+  // General
   static const String appName = 'WeDive.';
 
   // Onboarding
@@ -15,4 +16,22 @@ class WediveTextsFr {
       'Récoltez des déchets sur les spots et obtenez des récompenses en gagnant des niveaux';
 
   static const String skip = 'Passer';
+
+  // Login
+  static const String loginTitle = 'Connecte-toi';
+
+  static const String loginSubtitle =
+      'Accède à ton compte pour découvrir les spots de plongée autour de toi';
+
+  static const String emailLabel = 'E-Mail';
+
+  static const String passwordLabel = 'Mot de passe';
+
+  static const String rememberMe = 'Se souvenir de moi';
+
+  static const String forgotPassword = 'Mot de passe oublié ?';
+
+  static const String signIn = 'Se Connecter';
+
+  static const String signUp = 'S\'inscrire';
 }

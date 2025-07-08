@@ -9,6 +9,8 @@ class WediveOutlinedButtonTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: WediveColorsTheme.accentBlue,
           side: const BorderSide(color: WediveColorsTheme.accentBlue),
+          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -20,6 +22,8 @@ class WediveOutlinedButtonTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: WediveColorsTheme.accentBlue,
           side: const BorderSide(color: WediveColorsTheme.accentBlue),
+          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

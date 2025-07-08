@@ -1,9 +1,9 @@
 import 'package:Wedive/features/auth/controllers/onboarding_controller.dart';
-import 'package:Wedive/features/auth/screens/widgets/onboarding_button.dart';
-import 'package:Wedive/features/auth/screens/widgets/onboarding_dots.dart';
-import 'package:Wedive/features/auth/screens/widgets/onboarding_logo.dart';
-import 'package:Wedive/features/auth/screens/widgets/onboarding_page.dart';
-import 'package:Wedive/features/auth/screens/widgets/onboarding_skip.dart';
+import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_button.dart';
+import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_dots.dart';
+import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_logo.dart';
+import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_page.dart';
+import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_skip.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
