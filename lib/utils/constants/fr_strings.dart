@@ -34,4 +34,6 @@ class WediveTextsFr {
   static const String signIn = 'Se Connecter';
 
   static const String signUp = 'S\'inscrire';
+
+  static const String orSignInWith = 'Ou connectez-vous avec';
 }

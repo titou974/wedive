@@ -2,7 +2,6 @@ import 'package:Wedive/common/styles/spacing_styles.dart';
 import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_logo.dart';
 import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
-import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -114,20 +113,53 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Divider(
-                        color: dark
-                            ? WediveColorsTheme.textLightGrey
-                            : WediveColorsTheme.textDarkGrey,
-                        thickness: 0.5,
-                        indent: 60,
-                        endIndent: 5,
+                      Flexible(
+                        child: Divider(
+                          color: dark
+                              ? WediveColorsTheme.textLightGrey
+                              : WediveColorsTheme.textLightGrey,
+                          thickness: 0.5,
+                          indent: 30,
+                          endIndent: 5,
+                        ),
+                      ),
+                      Text(
+                        WediveTextsFr.orSignInWith,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      Flexible(
+                        child: Divider(
+                          color: dark
+                              ? WediveColorsTheme.textLightGrey
+                              : WediveColorsTheme.textLightGrey,
+                          thickness: 0.5,
+                          indent: 5,
+                          endIndent: 30,
+                        ),
                       ),
                     ],
                   ),
-                  SvgPicture.asset(
-                    WediveImages.sea,
-                    width: WeDiveHelperFunctions.screenWidth() * 0.8,
-                    height: WeDiveHelperFunctions.screenHeight() * 0.6,
+                  const SizedBox(height: WediveSizes.spaceBtwItems),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: WediveColorsTheme.textLightGrey,
+                          ),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: SvgPicture.asset(
+                            'assets/icons/google.svg',
+                            width: WediveSizes.iconMd,
+                            height: WediveSizes.iconMd,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
