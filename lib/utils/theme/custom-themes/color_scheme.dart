@@ -18,9 +18,9 @@ class WediveColorScheme {
 
   static const ColorScheme darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
-    primary: WediveColorsTheme.primaryBlue,
-    onPrimary: WediveColorsTheme.textWhite,
-    secondary: WediveColorsTheme.accentBlue,
+    primary: WediveColorsTheme.accentBlue,
+    onPrimary: WediveColorsTheme.accentBlue,
+    secondary: WediveColorsTheme.primaryBlue,
     onSecondary: WediveColorsTheme.textBlack,
     surface: WediveColorsTheme.textBlack,
     onSurface: WediveColorsTheme.textWhite,

@@ -59,6 +59,16 @@ class WediveTextTheme {
   );
 
   static TextTheme darkTextTheme = GoogleFonts.montserratTextTheme().copyWith(
+    titleLarge: GoogleFonts.montserrat(
+      color: WediveColorsTheme.textWhite,
+      fontSize: 32,
+      fontWeight: FontWeight.w600,
+    ),
+    titleMedium: GoogleFonts.montserrat(
+      color: WediveColorsTheme.textWhite,
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+    ),
     headlineLarge: GoogleFonts.montserrat(
       color: WediveColorsTheme.textWhite,
       fontSize: 32,

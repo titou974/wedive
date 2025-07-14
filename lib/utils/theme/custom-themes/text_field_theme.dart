@@ -6,7 +6,7 @@ class WediveTextFieldTheme {
 
   static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
     filled: true,
-    fillColor: Colors.grey.shade100, // Choose your preferred color
+    fillColor: Colors.grey.shade100,
     errorMaxLines: 3,
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
@@ -16,12 +16,13 @@ class WediveTextFieldTheme {
       color: WediveColorsTheme.textBlack,
     ),
     errorStyle: TextStyle().copyWith(fontStyle: FontStyle.normal),
+    floatingLabelBehavior: FloatingLabelBehavior.never,
     floatingLabelStyle: TextStyle().copyWith(
       color: WediveColorsTheme.textBlack.withValues(alpha: 0.8),
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide.none, // No outline
+      borderSide: BorderSide.none,
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
@@ -43,7 +44,7 @@ class WediveTextFieldTheme {
 
   static InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
     filled: true,
-    fillColor: Colors.grey.shade800, // Choose your preferred dark color
+    fillColor: Colors.grey.shade800,
     errorMaxLines: 3,
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
@@ -56,6 +57,7 @@ class WediveTextFieldTheme {
       color: WediveColorsTheme.textWhite,
     ),
     errorStyle: TextStyle().copyWith(fontStyle: FontStyle.normal),
+    floatingLabelBehavior: FloatingLabelBehavior.never,
     floatingLabelStyle: TextStyle().copyWith(
       color: WediveColorsTheme.textWhite.withValues(alpha: 0.8),
     ),

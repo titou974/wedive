@@ -1,7 +1,7 @@
+import 'package:Wedive/common/widgets/logo/logo.dart';
 import 'package:Wedive/features/auth/controllers/onboarding_controller.dart';
 import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_button.dart';
 import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_dots.dart';
-import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_logo.dart';
 import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_page.dart';
 import 'package:Wedive/features/auth/screens/onboarding/widgets/onboarding_skip.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';

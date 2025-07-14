@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Wedive',
+      title: 'WeDive',
       themeMode: ThemeMode.system,
       theme: WediveTheme.lightTheme,
       darkTheme: WediveTheme.darkTheme,

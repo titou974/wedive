@@ -20,8 +20,8 @@ class WediveOutlinedButtonTheme {
   static OutlinedButtonThemeData darkOutlinedButtonTheme =
       OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: WediveColorsTheme.accentBlue,
-          side: const BorderSide(color: WediveColorsTheme.accentBlue),
+          foregroundColor: WediveColorsTheme.textWhite,
+          side: const BorderSide(color: WediveColorsTheme.textWhite),
           textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(

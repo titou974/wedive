@@ -40,5 +40,9 @@ class WediveTheme {
     checkboxTheme: WediveCheckboxTheme.darkCheckboxTheme,
     bottomSheetTheme: WediveBottomSheetTheme.darkBottomSheetTheme,
     inputDecorationTheme: WediveTextFieldTheme.darkInputDecorationTheme,
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor:
+          WediveColorsTheme.textWhite, // Use a color that fits your theme
+    ), // <-- Add this line
   ); // <-- semicolon here
 }

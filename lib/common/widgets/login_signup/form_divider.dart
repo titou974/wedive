@@ -1,14 +1,13 @@
 import 'package:Wedive/utils/constants/colors.dart';
-import 'package:Wedive/utils/constants/fr_strings.dart';
+import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
-class OrConnectWith extends StatelessWidget {
-  const OrConnectWith({super.key, required this.dark});
-
-  final bool dark;
-
+class FormDivider extends StatelessWidget {
+  const FormDivider({super.key, required this.orSignInWith});
+  final String orSignInWith;
   @override
   Widget build(BuildContext context) {
+    final dark = WeDiveHelperFunctions.isDarkMode(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -22,10 +21,7 @@ class OrConnectWith extends StatelessWidget {
             endIndent: 5,
           ),
         ),
-        Text(
-          WediveTextsFr.orSignInWith,
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
+        Text(orSignInWith, style: Theme.of(context).textTheme.labelMedium),
         Flexible(
           child: Divider(
             color: dark

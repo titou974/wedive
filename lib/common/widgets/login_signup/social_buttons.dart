@@ -3,9 +3,8 @@ import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class OtherLogin extends StatelessWidget {
-  const OtherLogin({super.key});
-
+class SocialButtons extends StatelessWidget {
+  const SocialButtons({super.key});
   @override
   Widget build(BuildContext context) {
     return Row(

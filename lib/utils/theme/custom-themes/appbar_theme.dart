@@ -22,7 +22,7 @@ class WediveAppBarTheme {
     backgroundColor: Colors.transparent,
     surfaceTintColor: Colors.transparent,
     elevation: 0,
-    iconTheme: const IconThemeData(color: Colors.black, size: 24),
+    iconTheme: const IconThemeData(color: Colors.white, size: 24),
     actionsIconTheme: const IconThemeData(color: Colors.white, size: 24),
     titleTextStyle: const TextStyle(
       color: Colors.white,

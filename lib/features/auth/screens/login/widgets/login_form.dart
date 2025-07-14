@@ -1,6 +1,8 @@
+import 'package:Wedive/features/auth/screens/signup/signup.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class LoginForm extends StatelessWidget {
@@ -28,7 +30,6 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: WediveSizes.spaceBtwInputFields / 2),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,7 +60,8 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () =>
+                    Get.to(SignupScreen()), // Assuming you have a SignupScreen
                 child: Text(WediveTextsFr.signUp),
               ),
             ),

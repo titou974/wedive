@@ -36,4 +36,19 @@ class WediveTextsFr {
   static const String signUp = 'S\'inscrire';
 
   static const String orSignInWith = 'Ou connectez-vous avec';
+
+  static const String signUpTitle = 'Créez votre compte';
+
+  // Signup
+  static const String usernameLabel = 'Nom d\'utilisateur';
+
+  static const String iAgreeToTerms = 'J\'accepte les';
+
+  static const String andThe = 'et la';
+
+  static const String privacyPolicy = 'Politique de confidentialité';
+
+  static const String termsOfService = 'Conditions d\'utilisation';
+
+  static const String createAccount = 'Créer un compte';
 }
