@@ -1,8 +1,10 @@
+import 'package:Wedive/features/auth/screens/signup/signupsteps.dart';
 import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SignupForm extends StatelessWidget {
@@ -91,7 +93,7 @@ class SignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.to(const SignupSteps()),
               child: Text(WediveTextsFr.createAccount),
             ),
           ),

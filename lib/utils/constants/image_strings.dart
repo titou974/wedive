@@ -10,4 +10,8 @@ class WediveImages {
   static const String seaPollution = "assets/images/seapollution.svg";
 
   static const String sea = "assets/images/sea.svg";
+
+  static const String email = "assets/animations/email.json";
+
+  static const String success = "assets/animations/success.json";
 }

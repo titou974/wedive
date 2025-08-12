@@ -51,4 +51,29 @@ class WediveTextsFr {
   static const String termsOfService = 'Conditions d\'utilisation';
 
   static const String createAccount = 'Créer un compte';
+
+  // Select Activities
+  static const String selectActivitiesTitle = 'Sélectionnez tes activités';
+
+  static const String selectActivitiesSubtitle =
+      'Choisis ta/tes activité(s) marine(s) pour créer ton profil de plongeur';
+
+  // Localisation
+  static const String locationPermissionTitle = 'Autorisation de localisation';
+  static const String locationPermissionSubtitle =
+      'WeDive a besoin de votre position pour vous montrer les spots de plongée à proximité.';
+
+  // Verify Email
+
+  static const String confirmEmail = "Vérifie ton e-mail";
+
+  static const String confirmEmailSubtitle =
+      "Félicitations ! Vous être désormais un WeDiver. Confirmez votre e-mail pour pouvoir profiter de toute l'expérience";
+
+  static const String next = 'Continuer';
+
+  static const String yourAccountCreatedTitle = 'Votre compte a été créé !';
+
+  static const String yourAccountCreatedSubtitle =
+      'Vous pouvez maintenant commencer à explorer les spots de plongée et partager vos aventures marines.';
 }
