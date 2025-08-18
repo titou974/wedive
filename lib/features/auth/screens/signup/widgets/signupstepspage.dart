@@ -23,8 +23,6 @@ class SignupStepsPage extends StatelessWidget {
           Header(title: title, subtitle: subtitle),
           SizedBox(height: WediveSizes.spaceBtwSections),
           Expanded(child: stepContent),
-          // Add your activity selection widgets here
-          // For example, a list of checkboxes or buttons for activities
         ],
       ),
     );
