@@ -1,3 +1,5 @@
+import 'package:Wedive/utils/constants/fr_strings.dart';
+import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,43 +25,50 @@ class _DivingSportPageState extends State<DivingSportPage> {
     super.initState();
     sports = [
       {
-        'name': 'Snorkeling',
-        'isChecked': false,
-        'icon': 'assets/icons/snorkeling.svg',
-        'iconPrimary': 'assets/icons/snorkeling_primary.svg',
-      },
-      {
-        'name': 'Free Diving',
-        'isChecked': false,
+        'name': WediveTextsFr.freeDiving,
+        'description': WediveTextsFr.freeDivingDescription,
+        'isChecked': true,
         'icon': 'assets/icons/freediving.svg',
         'iconPrimary': 'assets/icons/freediving_primary.svg',
       },
       {
-        'name': 'Bottle Diving',
+        'name': WediveTextsFr.snorkeling,
+        'description': WediveTextsFr.snorkelingDescription,
+        'isChecked': true,
+        'icon': 'assets/icons/snorkeling.svg',
+        'iconPrimary': 'assets/icons/snorkeling_primary.svg',
+      },
+      {
+        'name': WediveTextsFr.bottleDiving,
+        'description': WediveTextsFr.bottleDivingDescription,
         'isChecked': false,
         'icon': 'assets/icons/bottlediving.svg',
         'iconPrimary': 'assets/icons/bottlediving_primary.svg',
       },
       {
-        'name': 'Cliff Diving',
+        'name': WediveTextsFr.cliffDiving,
+        'description': WediveTextsFr.cliffDivingDescription,
         'isChecked': false,
         'icon': 'assets/icons/dods.svg',
         'iconPrimary': 'assets/icons/dods_primary.svg',
       },
       {
-        'name': 'Spearfishing',
+        'name': WediveTextsFr.spearfishing,
+        'description': WediveTextsFr.spearfishingDescription,
         'isChecked': false,
         'icon': 'assets/icons/spearfishing.svg',
         'iconPrimary': 'assets/icons/spearfishing_primary.svg',
       },
       {
-        'name': 'Kayak',
+        'name': WediveTextsFr.kayak,
+        'description': WediveTextsFr.kayakDescription,
         'isChecked': false,
         'icon': 'assets/icons/kayak.svg',
         'iconPrimary': 'assets/icons/kayak_primary.svg',
       },
       {
-        'name': 'Fishing',
+        'name': WediveTextsFr.fishing,
+        'description': WediveTextsFr.fishingDescription,
         'isChecked': false,
         'icon': 'assets/icons/fishing.svg',
         'iconPrimary': 'assets/icons/fishing_primary.svg',
@@ -76,7 +85,7 @@ class _DivingSportPageState extends State<DivingSportPage> {
         return AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           curve: Curves.ease,
-          margin: const EdgeInsets.symmetric(vertical: 6),
+          margin: const EdgeInsets.symmetric(vertical: WediveSizes.sm),
           decoration: BoxDecoration(
             border: Border.all(
               color: isChecked
@@ -90,24 +99,40 @@ class _DivingSportPageState extends State<DivingSportPage> {
             value: isChecked,
             onChanged: (val) {
               setState(() {
-                // Uncheck all others for radio-like behavior
-                for (var s in sports) {
-                  s['isChecked'] = false;
-                }
                 sport['isChecked'] = val ?? false;
                 if (val == true) {
                   widget.onChanged(sport['name']);
                 }
               });
             },
-            title: Text(
-              sport['name'],
-              style: Theme.of(context).textTheme.labelLarge,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  sport['name'],
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                const SizedBox(
+                  height: WediveSizes.xs,
+                ), // Space between title and subtitle
+                Text(
+                  sport['description'],
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ],
             ),
-            secondary: SvgPicture.asset(
-              isChecked ? sport['iconPrimary'] : sport['icon'],
-              width: 40,
-              height: 40,
+            secondary: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (child, animation) =>
+                  FadeTransition(opacity: animation, child: child),
+              child: SvgPicture.asset(
+                isChecked ? sport['iconPrimary'] : sport['icon'],
+                width: 50,
+                height: 50,
+                key: ValueKey(
+                  isChecked,
+                ), // Important for AnimatedSwitcher to detect change
+              ),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),

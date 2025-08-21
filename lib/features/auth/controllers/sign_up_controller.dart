@@ -9,6 +9,15 @@ class SignUpController extends GetxController {
 
   void updatePageIndicator(int index) => currentPageIndex.value = index;
 
+  void dotNavigationClick(int index) {
+    currentPageIndex.value = index;
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   void nextPage() {
     int page = currentPageIndex.value + 1;
     pageController.animateToPage(

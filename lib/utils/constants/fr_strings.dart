@@ -58,6 +58,32 @@ class WediveTextsFr {
   static const String selectActivitiesSubtitle =
       'Choisis ta/tes activité(s) marine(s) pour créer ton profil de plongeur';
 
+  static const String snorkeling = 'Snorkeling';
+  static const String snorkelingDescription =
+      'Pour des explos masque/tuba en surface';
+
+  static const String freeDiving = 'Apnée';
+  static const String freeDivingDescription =
+      "On dit que le mégalodon est toujours en vie";
+
+  static const String bottleDiving = 'Plongée bouteille';
+  static const String bottleDivingDescription =
+      'Ramène nous des selfies avec la palanquée';
+
+  static const String cliffDiving = 'Plongeon';
+  static const String cliffDivingDescription =
+      'On veut du DODS ici ! Faites nous vibrez';
+
+  static const String spearfishing = 'Chasse sous-marine';
+  static const String spearfishingDescription =
+      'On dit que le mégalodon est toujours en vie';
+
+  static const String kayak = 'Kayak';
+  static const String kayakDescription = 'Ne casse pas tes pagaies moussaillon';
+
+  static const String fishing = 'Pêche';
+  static const String fishingDescription = 'Pêche en gros ou en petit';
+
   // Localisation
   static const String locationPermissionTitle = 'Autorisation de localisation';
   static const String locationPermissionSubtitle =

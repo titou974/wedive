@@ -1,4 +1,4 @@
-import 'package:Wedive/features/auth/controllers/onboarding_controller.dart';
+import 'package:Wedive/features/auth/controllers/sign_up_controller.dart';
 import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:Wedive/utils/device/device_utility.dart';
@@ -12,7 +12,7 @@ class SignupStepsDots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = WeDiveHelperFunctions.isDarkMode(context);
-    final controller = OnBoardingController.instance;
+    final controller = SignUpController.instance;
 
     return Positioned(
       top: WeDiveUtils.getAppBarHeight() + 25,
@@ -20,7 +20,7 @@ class SignupStepsDots extends StatelessWidget {
       child: SmoothPageIndicator(
         controller: controller.pageController,
         onDotClicked: controller.dotNavigationClick,
-        count: 3,
+        count: 2,
         effect: WormEffect(
           activeDotColor: dark
               ? WediveColorsTheme.secondaryBlue
