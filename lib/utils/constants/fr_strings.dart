@@ -64,7 +64,7 @@ class WediveTextsFr {
 
   static const String freeDiving = 'Apnée';
   static const String freeDivingDescription =
-      "On dit que le mégalodon est toujours en vie";
+      "Deviens le maître des profondeurs en apnée";
 
   static const String bottleDiving = 'Plongée bouteille';
   static const String bottleDivingDescription =
@@ -84,6 +84,8 @@ class WediveTextsFr {
   static const String fishing = 'Pêche';
   static const String fishingDescription = 'Pêche en gros ou en petit';
 
+  static const String next = 'CONTINUER';
+
   // Localisation
   static const String locationPermissionTitle = 'Autorisation de localisation';
   static const String locationPermissionSubtitle =
@@ -95,8 +97,6 @@ class WediveTextsFr {
 
   static const String confirmEmailSubtitle =
       "Félicitations ! Vous être désormais un WeDiver. Confirmez votre e-mail pour pouvoir profiter de toute l'expérience";
-
-  static const String next = 'Continuer';
 
   static const String yourAccountCreatedTitle = 'Votre compte a été créé !';
 

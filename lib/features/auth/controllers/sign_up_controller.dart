@@ -6,8 +6,19 @@ class SignUpController extends GetxController {
 
   final pageController = PageController();
   RxInt currentPageIndex = 0.obs;
+  String? location;
+  RxList<String> selectedSports = <String>[].obs;
 
-  void updatePageIndicator(int index) => currentPageIndex.value = index;
+  void updatePageIndicator(int index) => {currentPageIndex.value = index};
+
+  void updateLocation(String value) {
+    location = value;
+  }
+
+  void updateSelectedSports(List<String> sports) {
+    print('Selected sports: $sports');
+    selectedSports.value = sports;
+  }
 
   void dotNavigationClick(int index) {
     currentPageIndex.value = index;

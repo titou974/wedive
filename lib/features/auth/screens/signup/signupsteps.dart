@@ -1,5 +1,7 @@
 import 'package:Wedive/features/auth/controllers/sign_up_controller.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/divingsport.dart';
+import 'package:Wedive/features/auth/screens/signup/widgets/localisation.dart';
+import 'package:Wedive/features/auth/screens/signup/widgets/signupsteps_button.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/signupsteps_dots.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/signupstepspage.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
@@ -14,48 +16,41 @@ class SignupSteps extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: SignupStepsDots()),
+      appBar: AppBar(
+        centerTitle: true,
+        title: SignupStepsDots(),
+        automaticallyImplyLeading: false,
+      ),
       body: Stack(
         children: [
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndicator,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               SignupStepsPage(
                 title: WediveTextsFr.selectActivitiesTitle,
                 subtitle: WediveTextsFr.selectActivitiesSubtitle,
                 stepContent: DivingSportPage(
-                  selectedSport: null,
-                  onChanged: (value) {
-                    // Handle sport selection change
+                  selectedSports: controller.selectedSports,
+                  onChanged: (sports) {
+                    controller.updateSelectedSports(sports);
                   },
                 ),
               ),
               SignupStepsPage(
                 title: WediveTextsFr.locationPermissionTitle,
                 subtitle: WediveTextsFr.locationPermissionSubtitle,
-                stepContent: Padding(
-                  padding: EdgeInsets.all(WediveSizes.defaultSpace),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        WediveTextsFr.locationPermissionTitle,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: WediveSizes.spaceBtwItems),
-                      Text(
-                        WediveTextsFr.locationPermissionSubtitle,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
+                stepContent: LocalisationPage(
+                  location: controller.location,
+                  onChanged: (value) {
+                    controller.updateLocation(value);
+                  },
                 ),
               ),
             ],
           ),
+          SignupContinueButton(),
         ],
       ),
     );

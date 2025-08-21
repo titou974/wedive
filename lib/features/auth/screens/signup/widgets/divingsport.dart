@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DivingSportPage extends StatefulWidget {
-  final String? selectedSport;
-  final Function(String) onChanged;
+  final List<String> selectedSports;
+  final Function(List<String>) onChanged;
 
   const DivingSportPage({
     super.key,
-    required this.selectedSport,
+    required this.selectedSports,
     required this.onChanged,
   });
 
@@ -60,13 +60,6 @@ class _DivingSportPageState extends State<DivingSportPage> {
         'iconPrimary': 'assets/icons/spearfishing_primary.svg',
       },
       {
-        'name': WediveTextsFr.kayak,
-        'description': WediveTextsFr.kayakDescription,
-        'isChecked': false,
-        'icon': 'assets/icons/kayak.svg',
-        'iconPrimary': 'assets/icons/kayak_primary.svg',
-      },
-      {
         'name': WediveTextsFr.fishing,
         'description': WediveTextsFr.fishingDescription,
         'isChecked': false,
@@ -81,7 +74,7 @@ class _DivingSportPageState extends State<DivingSportPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: sports.map((sport) {
-        final isChecked = sport['isChecked'] as bool;
+        final isChecked = widget.selectedSports.contains(sport['name']);
         return AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           curve: Curves.ease,
@@ -99,9 +92,16 @@ class _DivingSportPageState extends State<DivingSportPage> {
             value: isChecked,
             onChanged: (val) {
               setState(() {
-                sport['isChecked'] = val ?? false;
                 if (val == true) {
-                  widget.onChanged(sport['name']);
+                  // Add to selected
+                  final updated = List<String>.from(widget.selectedSports)
+                    ..add(sport['name']);
+                  widget.onChanged(updated);
+                } else {
+                  // Remove from selected
+                  final updated = List<String>.from(widget.selectedSports)
+                    ..remove(sport['name']);
+                  widget.onChanged(updated);
                 }
               });
             },
@@ -112,9 +112,7 @@ class _DivingSportPageState extends State<DivingSportPage> {
                   sport['name'],
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                const SizedBox(
-                  height: WediveSizes.xs,
-                ), // Space between title and subtitle
+                const SizedBox(height: WediveSizes.xs),
                 Text(
                   sport['description'],
                   style: Theme.of(context).textTheme.labelMedium,
@@ -129,9 +127,7 @@ class _DivingSportPageState extends State<DivingSportPage> {
                 isChecked ? sport['iconPrimary'] : sport['icon'],
                 width: 50,
                 height: 50,
-                key: ValueKey(
-                  isChecked,
-                ), // Important for AnimatedSwitcher to detect change
+                key: ValueKey(isChecked),
               ),
             ),
             shape: RoundedRectangleBorder(

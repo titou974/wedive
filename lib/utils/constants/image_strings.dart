@@ -22,4 +22,6 @@ class WediveImages {
   static const String spearfishing = "assets/images/spearfishing.svg";
   static const suntan = "assets/images/suntan.svg";
   static const String fishing = "assets/images/fishing.svg";
+
+  static const String localisation = "assets/animations/localisation.json";
 }
