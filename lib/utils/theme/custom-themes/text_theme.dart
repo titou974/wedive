@@ -16,6 +16,11 @@ class WediveTextTheme {
       fontSize: 24,
       fontWeight: FontWeight.w600,
     ),
+    titleSmall: GoogleFonts.montserrat(
+      color: WediveColorsTheme.accentBlue,
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+    ),
     headlineLarge: GoogleFonts.montserrat(
       color: WediveColorsTheme.textBlack,
       fontSize: 32,
@@ -29,7 +34,7 @@ class WediveTextTheme {
     headlineSmall: GoogleFonts.montserrat(
       color: WediveColorsTheme.textBlack,
       fontSize: 16,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
     ),
     bodyLarge: GoogleFonts.montserrat(
       color: WediveColorsTheme.textBlack,
@@ -69,6 +74,11 @@ class WediveTextTheme {
       fontSize: 24,
       fontWeight: FontWeight.w600,
     ),
+    titleSmall: GoogleFonts.montserrat(
+      color: WediveColorsTheme.accentBlue,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
     headlineLarge: GoogleFonts.montserrat(
       color: WediveColorsTheme.textWhite,
       fontSize: 32,
@@ -82,7 +92,7 @@ class WediveTextTheme {
     headlineSmall: GoogleFonts.montserrat(
       color: WediveColorsTheme.textWhite,
       fontSize: 16,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
     ),
     bodyLarge: GoogleFonts.montserrat(
       color: WediveColorsTheme.textWhite,

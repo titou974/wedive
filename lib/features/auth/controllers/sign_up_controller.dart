@@ -1,3 +1,5 @@
+import 'package:Wedive/features/feed/screens/map/map.dart';
+import 'package:Wedive/navigation_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,13 +32,19 @@ class SignUpController extends GetxController {
   }
 
   void nextPage() {
-    int page = currentPageIndex.value + 1;
-    pageController.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-    currentPageIndex.value = page;
+    if (currentPageIndex.value == 1) {
+      // Assuming 2 is the last page index
+      // Get.to(LoginScreen()); // Navigate to the login screen
+      Get.offAll(NavigationMenu());
+    } else {
+      int page = currentPageIndex.value + 1;
+      pageController.animateToPage(
+        page,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+      currentPageIndex.value = page;
+    }
   }
 
   void previousPage() {

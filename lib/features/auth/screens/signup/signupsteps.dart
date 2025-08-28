@@ -5,7 +5,6 @@ import 'package:Wedive/features/auth/screens/signup/widgets/signupsteps_button.d
 import 'package:Wedive/features/auth/screens/signup/widgets/signupsteps_dots.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/signupstepspage.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
-import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 
