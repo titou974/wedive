@@ -1,4 +1,3 @@
-import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 

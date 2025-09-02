@@ -18,7 +18,7 @@ class WediveTextTheme {
     ),
     titleSmall: GoogleFonts.montserrat(
       color: WediveColorsTheme.accentBlue,
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: FontWeight.w500,
     ),
     headlineLarge: GoogleFonts.montserrat(
