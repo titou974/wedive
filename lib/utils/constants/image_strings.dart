@@ -24,4 +24,16 @@ class WediveImages {
   static const String fishing = "assets/images/fishing.svg";
 
   static const String localisation = "assets/animations/localisation.json";
+
+  static const String spot1 = "assets/images/spots/boucan.webp";
+  static const String spot2 = "assets/images/spots/caplhaoussaye.webp";
+  static const String spot3 = "assets/images/spots/troubleu.webp";
+
+  static const profilePictureUser = "assets/images/yo.jpg";
+
+  static const String avatar1 = "assets/images/users/diver1.webp";
+
+  static const String avatar2 = "assets/images/users/diver2.webp";
+
+  static const String avatar3 = "assets/images/users/diver3.webp";
 }

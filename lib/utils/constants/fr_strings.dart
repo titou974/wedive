@@ -102,4 +102,12 @@ class WediveTextsFr {
 
   static const String yourAccountCreatedSubtitle =
       'Vous pouvez maintenant commencer à explorer les spots de plongée et partager vos aventures marines.';
+
+  static const String spot1 = 'Boucan Canot';
+
+  static const String spot2 = 'Cap La Houssaye';
+
+  static const String spot3 = 'Trou d\'Eau';
+
+  static const String cityTest = 'Saint-Gilles les Bains, France';
 }
