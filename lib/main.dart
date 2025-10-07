@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:Wedive/app.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
+
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Pass your access token to MapboxOptions so you can load a map
-  String accessToken = const String.fromEnvironment("ACCESS_TOKEN");
-  MapboxOptions.setAccessToken(accessToken);
+  String accessToken = dotenv.env['MAPBOX_ACCESS_TOKEN'] ?? "";
 
-  // Define options for your camera
+  MapboxOptions.setAccessToken(accessToken);
 
   runApp(const App());
 }

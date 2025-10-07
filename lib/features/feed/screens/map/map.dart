@@ -23,39 +23,45 @@ class MapScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Map fills the whole screen
           MapWidget(
             key: const ValueKey('main_map'),
             cameraOptions: camera,
             styleUri: "mapbox://styles/titou97410/cmgen9jaa00gb01qw7tld6aq5",
             onMapCreated: onMapCreated,
           ),
-
-          // Transparent AppBar on top of the map
           SafeArea(
-            child: IgnorePointer(
-              child: WediveAppBar(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppLogo(isInAppBar: true, little: true),
-                    SizedBox(height: WediveSizes.sm),
-                    Text(
-                      WediveTextsFr.cityTest,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        decoration: TextDecoration.underline,
-                        decorationColor: WediveColorsTheme.accentBlue,
-                      ),
+            child: Stack(
+              children: [
+                IgnorePointer(
+                  ignoring: true,
+                  child: WediveAppBar(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppLogo(isInAppBar: true, little: true),
+                        SizedBox(height: WediveSizes.sm),
+                        Text(
+                          WediveTextsFr.cityTest,
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(
+                                decoration: TextDecoration.underline,
+                                decorationColor: WediveColorsTheme.accentBlue,
+                              ),
+                        ),
+                      ],
                     ),
-                  ],
+                    actions: [],
+                  ),
                 ),
-                actions: [
-                  const Avatar(imageUrl: WediveImages.profilePictureUser),
-                ],
-              ),
+                // Place the avatar button separately and position it
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Avatar(imageUrl: WediveImages.profilePictureUser),
+                ),
+              ],
             ),
           ),
-          // Carousel positioned at the bottom, above the nav bar
           Positioned(
             left: 0,
             right: 0,
