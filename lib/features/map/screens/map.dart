@@ -1,10 +1,11 @@
 import 'package:Wedive/common/widgets/appbar/appbar.dart';
 import 'package:Wedive/common/widgets/avatar/avatar.dart';
-import 'package:Wedive/features/feed/screens/map/widgets/infinitycarousel.dart';
+import 'package:Wedive/features/map/screens/widgets/infinitycarousel.dart';
 import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:Wedive/utils/constants/mapbox.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
+import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:Wedive/common/widgets/logo/logo.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
@@ -23,11 +24,18 @@ class MapScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          MapWidget(
-            key: const ValueKey('main_map'),
-            cameraOptions: camera,
-            styleUri: "mapbox://styles/titou97410/cmgen9jaa00gb01qw7tld6aq5",
-            onMapCreated: onMapCreated,
+          Builder(
+            builder: (context) {
+              final dark = WeDiveHelperFunctions.isDarkMode(context);
+              return MapWidget(
+                key: ValueKey(dark), // <-- Key changes when theme changes
+                cameraOptions: camera,
+                styleUri: dark
+                    ? "mapbox://styles/titou97410/cmgj08od800o401sb8psfbo2j"
+                    : "mapbox://styles/titou97410/cmgen9jaa00gb01qw7tld6aq5",
+                onMapCreated: onMapCreated,
+              );
+            },
           ),
           SafeArea(
             child: Stack(
@@ -45,7 +53,9 @@ class MapScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleSmall
                               ?.copyWith(
                                 decoration: TextDecoration.underline,
-                                decorationColor: WediveColorsTheme.accentBlue,
+                                decorationColor: Theme.of(
+                                  context,
+                                ).colorScheme.primary,
                               ),
                         ),
                       ],

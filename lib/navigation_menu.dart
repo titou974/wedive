@@ -1,4 +1,4 @@
-import 'package:Wedive/features/feed/screens/map/map.dart';
+import 'package:Wedive/features/map/screens/map.dart';
 import 'package:Wedive/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,8 +26,8 @@ class NavigationMenu extends StatelessWidget {
                 height: 28,
                 colorFilter: ColorFilter.mode(
                   controller.selectedIndex.value == 0
-                      ? WediveColorsTheme.accentBlue
-                      : WediveColorsTheme.textBlack,
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.surface,
                   BlendMode.srcIn,
                 ),
               ),
@@ -40,8 +40,8 @@ class NavigationMenu extends StatelessWidget {
                 height: 40,
                 colorFilter: ColorFilter.mode(
                   controller.selectedIndex.value == 1
-                      ? WediveColorsTheme.accentBlue
-                      : WediveColorsTheme.textBlack,
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.surface,
                   BlendMode.srcIn,
                 ),
               ),
@@ -54,15 +54,15 @@ class NavigationMenu extends StatelessWidget {
                 height: 28,
                 colorFilter: ColorFilter.mode(
                   controller.selectedIndex.value == 2
-                      ? WediveColorsTheme.accentBlue
-                      : WediveColorsTheme.textBlack,
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.surface,
                   BlendMode.srcIn,
                 ),
               ),
               label: '',
             ),
           ],
-          backgroundColor: WediveColorsTheme.backgroundWhite,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           indicatorColor: Colors.transparent,
           shadowColor: WediveColorsTheme.secondaryBlue,
         ),
