@@ -23,7 +23,7 @@ class OnBoardingDots extends StatelessWidget {
         count: 3,
         effect: ExpandingDotsEffect(
           activeDotColor: dark
-              ? WediveColorsTheme.secondaryBlue
+              ? WediveColorsTheme.primaryPink
               : WediveColorsTheme.primaryBlue,
           dotHeight: 6,
         ),

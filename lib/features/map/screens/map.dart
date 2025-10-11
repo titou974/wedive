@@ -1,7 +1,6 @@
 import 'package:Wedive/common/widgets/appbar/appbar.dart';
 import 'package:Wedive/common/widgets/avatar/avatar.dart';
 import 'package:Wedive/features/map/screens/widgets/infinitycarousel.dart';
-import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:Wedive/utils/constants/mapbox.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
@@ -55,7 +54,7 @@ class MapScreen extends StatelessWidget {
                                 decoration: TextDecoration.underline,
                                 decorationColor: Theme.of(
                                   context,
-                                ).colorScheme.primary,
+                                ).colorScheme.secondary,
                               ),
                         ),
                       ],

@@ -5,9 +5,9 @@ class WediveColorsTheme {
 
   static const Color primaryBlue = Color(0xFF020063); // Main primary
   static const Color accentBlue = Color(0xFF322EFF); // Active button, highlight
-  static const Color secondaryBlue = Color(
-    0xFF659BFF,
-  ); // Grade highlight, lighter accents
+  static const Color secondaryBlue = Color(0xFF659BFF);
+
+  static const Color primaryPink = Color(0xFFAD08FF);
   static const Color chipBlue = Color.fromARGB(128, 41, 19, 234);
   static const Gradient linearGradient = LinearGradient(
     colors: [

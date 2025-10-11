@@ -20,7 +20,7 @@ class WediveElevatedButtonTheme {
   static ElevatedButtonThemeData darkElevatedButtonTheme =
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: WediveColorsTheme.secondaryBlue, // Main primary
+          backgroundColor: WediveColorsTheme.primaryPink, // Main primary
           foregroundColor: Colors.white,
           textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           minimumSize: const Size(150, 50),
