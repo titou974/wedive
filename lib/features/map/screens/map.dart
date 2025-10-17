@@ -1,5 +1,6 @@
 import 'package:Wedive/common/widgets/appbar/appbar.dart';
 import 'package:Wedive/common/widgets/avatar/avatar.dart';
+import 'package:Wedive/features/map/controllers/map_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/infinitycarousel.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:Wedive/utils/constants/mapbox.dart';
@@ -9,15 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:Wedive/common/widgets/logo/logo.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/lists.dart';
+import 'package:get/get.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
-void onMapCreated(MapboxMap mapboxMap) async {
-  mapboxMap.scaleBar.updateSettings(ScaleBarSettings(enabled: false));
-}
-
-class MapScreen extends StatelessWidget {
+class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
+  @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  MapboxMap? mapboxMapController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +32,6 @@ class MapScreen extends StatelessWidget {
               final dark = WeDiveHelperFunctions.isDarkMode(context);
               return MapWidget(
                 key: ValueKey(dark), // <-- Key changes when theme changes
-                cameraOptions: camera,
                 styleUri: dark
                     ? "mapbox://styles/titou97410/cmgj08od800o401sb8psfbo2j"
                     : "mapbox://styles/titou97410/cmgen9jaa00gb01qw7tld6aq5",
@@ -80,5 +83,15 @@ class MapScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onMapCreated(MapboxMap mapboxMap) {
+    setState(() {
+      mapboxMapController = mapboxMap;
+    });
+    // Disable the scale bar
+    mapboxMap.scaleBar.updateSettings(ScaleBarSettings(enabled: false));
+    // Update the location of the user
+    mapboxMap.location.updateSettings(LocationComponentSettings(enabled: true));
   }
 }
