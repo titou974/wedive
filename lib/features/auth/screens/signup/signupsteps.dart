@@ -85,17 +85,8 @@ class SignupSteps extends StatelessWidget {
                           : () => {
                               localisationController.requestLocationAndProceed(
                                 context: context,
+                                navigateOnSuccess: true,
                               ),
-
-                              if (localisationController
-                                          .locationPermission
-                                          .value ==
-                                      LocationPermission.always ||
-                                  localisationController
-                                          .locationPermission
-                                          .value ==
-                                      LocationPermission.whileInUse)
-                                {signupController.nextPage()},
                             },
                       child: loading
                           ? const SizedBox(

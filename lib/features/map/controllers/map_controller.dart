@@ -1,67 +1,81 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
-import 'package:geolocator/geolocator.dart' as gl;
-import 'package:geolocator/geolocator.dart';
+import 'package:Wedive/utils/constants/mapbox.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mp;
+import 'package:geolocator/geolocator.dart';
 
 class MapController extends GetxController {
   static MapController get instance => Get.find<MapController>();
-  final localisationController = Get.put(LocalisationController());
+  final localisationController = Get.find<LocalisationController>();
+
   mp.MapboxMap? mapboxController;
+  bool _mapReady = false;
 
-  void onMapCreated(mp.MapboxMap mapboxMap) {
+  @override
+  void onInit() {
+    super.onInit();
+    // Écoute les changements de position et recentre si la map est prête
+    localisationController.currentPosition.listen((pos) {
+      if (pos != null) {
+        debugPrint('Localisation update: ${pos.latitude}, ${pos.longitude}');
+        if (_mapReady && mapboxController != null) {
+          _moveCameraToPosition(pos);
+        }
+      }
+    });
+  }
+
+  // appelé depuis MapWidget.onMapCreated
+  Future<void> onMapCreated(mp.MapboxMap mapboxMap) async {
     mapboxController = mapboxMap;
+    _mapReady = true;
+    debugPrint('Map created');
 
-    // Disable the scale bar
-    mapboxController?.scaleBar.updateSettings(
-      mp.ScaleBarSettings(enabled: false),
-    );
-
-    // Update the location of the user
-    mapboxController?.location.updateSettings(
-      mp.LocationComponentSettings(enabled: true, pulsingEnabled: true),
-    );
-
-    setupPositionTracking();
-  }
-
-  Future<void> setupPositionTracking() async {
-    bool serviceEnabled;
-    gl.LocationPermission permission;
-
-    serviceEnabled = await gl.Geolocator.isLocationServiceEnabled();
-
-    await localisationController.requestLocationAndProceed();
-    await getPositionStream();
-  }
-
-  Future<void> getPositionStream() async {
-    localisationController.userPositionStream?.cancel();
-    if (localisationController.locationPermission.value ==
-            LocationPermission.always ||
-        localisationController.locationPermission.value ==
-            LocationPermission.whileInUse) {
-      localisationController.userPositionStream =
-          Geolocator.getPositionStream(
-            locationSettings: localisationController.locationSettings,
-          ).listen((Position? position) {
-            if (position != null && mapboxController != null) {
-              print(
-                'New position: ${position.latitude}, ${position.longitude}',
-              );
-              mapboxController?.setCamera(
-                mp.CameraOptions(
-                  center: mp.Point(
-                    coordinates: mp.Position(
-                      position.longitude,
-                      position.latitude,
-                    ),
-                  ),
-                  zoom: 14.0,
-                ),
-              );
-            }
-          });
+    try {
+      // Désactiver scale bar / activer location puck (UI only)
+      mapboxController?.scaleBar.updateSettings(
+        mp.ScaleBarSettings(enabled: false),
+      );
+      mapboxController?.location.updateSettings(
+        mp.LocationComponentSettings(enabled: true, pulsingEnabled: true),
+      );
+    } catch (e) {
+      debugPrint('Map settings error: $e');
     }
+
+    // si on a déjà une position connue, recentre immédiatement
+    final pos = localisationController.currentPosition.value;
+    if (pos != null) {
+      _moveCameraToPosition(pos);
+    }
+
+    // démarrer le stream de positions si besoin
+    await localisationController.startPositionStream();
+  }
+
+  void _moveCameraToPosition(Position position) {
+    try {
+      final coords = mp.Position(
+        position.longitude,
+        position.latitude,
+      ); // lon, lat
+      debugPrint('Moving camera to: ${coords}');
+      mapboxController?.setCamera(
+        mp.CameraOptions(
+          center: mp.Point(coordinates: coords),
+          zoom: MapboxConstants.defaultZoomLevel,
+        ),
+      );
+    } catch (e) {
+      debugPrint('Error moving camera: $e');
+    }
+  }
+
+  @override
+  void onClose() {
+    mapboxController = null;
+    _mapReady = false;
+    super.onClose();
   }
 }

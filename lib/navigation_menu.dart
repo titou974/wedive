@@ -1,6 +1,5 @@
 import 'package:Wedive/common/controllers/navigation_menu_controller.dart';
 import 'package:Wedive/utils/constants/colors.dart';
-import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,6 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationController());
-    final dark = WeDiveHelperFunctions.isDarkMode(context);
 
     return Scaffold(
       bottomNavigationBar: Obx(

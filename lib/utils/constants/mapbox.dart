@@ -6,3 +6,7 @@ CameraOptions camera = CameraOptions(
   bearing: 0,
   pitch: 0,
 );
+
+class MapboxConstants {
+  static const double defaultZoomLevel = 10.0;
+}

@@ -1,4 +1,3 @@
-import 'package:geolocator/geolocator.dart';
 import 'package:Wedive/navigation_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

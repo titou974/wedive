@@ -31,6 +31,9 @@ class WediveImages {
 
   static const profilePictureUser = "assets/images/yo.jpg";
 
+  static const String avatarPlaceholder =
+      "assets/images/users/avatar_placeholder.webp";
+
   static const String avatar1 = "assets/images/users/diver1.webp";
 
   static const String avatar2 = "assets/images/users/diver2.webp";
