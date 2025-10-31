@@ -6,13 +6,8 @@ import 'package:lottie/lottie.dart';
 
 class LocalisationPage extends StatelessWidget {
   final String? location;
-  final Function(String) onChanged;
 
-  const LocalisationPage({
-    super.key,
-    required this.location,
-    required this.onChanged,
-  });
+  const LocalisationPage({super.key, required this.location});
 
   @override
   Widget build(BuildContext context) {

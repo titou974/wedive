@@ -110,4 +110,13 @@ class WediveTextsFr {
   static const String spot3 = 'Trou d\'Eau';
 
   static const String cityTest = 'Saint-Gilles les Bains, France';
+
+  static const String locationPermissionDeniedTitle =
+      'Autorisation de localisation refusée';
+
+  static const String locationPermissionSubtitleDeniedForever =
+      'L\'autorisation de localisation a été refusée de manière permanente. Veuillez activer la localisation dans les paramètres de l\'application pour continuer.';
+
+  static const String locationPermissionSubtitleDenied =
+      'L\'autorisation de localisation a été refusée. Veuillez autoriser la localisation pour continuer.';
 }

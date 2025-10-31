@@ -8,67 +8,10 @@ class SignUpController extends GetxController {
 
   final pageController = PageController();
   RxInt currentPageIndex = 0.obs;
-  String? location;
   RxList<String> selectedSports = <String>[].obs;
 
   // location / onboarding state
-  RxBool isRequestingLocation = false.obs;
-  Rx<LocationPermission?> locationPermission = Rxn<LocationPermission>();
-  RxBool locationServiceEnabled = false.obs;
-  Position? currentPosition;
-
-  // Request permission, obtain position and navigate when accepted
-  Future<void> requestLocationAndProceed({BuildContext? context}) async {
-    isRequestingLocation.value = true;
-    locationServiceEnabled.value = await Geolocator.isLocationServiceEnabled();
-    locationPermission.value = await Geolocator.checkPermission();
-
-    if (!locationServiceEnabled.value) {
-      // GPS off — leave state for UI to show instruction
-      isRequestingLocation.value = false;
-      return;
-    }
-
-    if (locationPermission.value == LocationPermission.denied) {
-      final p = await Geolocator.requestPermission();
-      locationPermission.value = p;
-    }
-
-    if (locationPermission.value == LocationPermission.deniedForever) {
-      // permanently denied — ask user to open settings
-      await Geolocator.openAppSettings();
-      isRequestingLocation.value = false;
-      return;
-    }
-
-    if (locationPermission.value == LocationPermission.always ||
-        locationPermission.value == LocationPermission.whileInUse) {
-      try {
-        currentPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.best,
-        );
-        location = '${currentPosition!.latitude},${currentPosition!.longitude}';
-        // Immediately navigate to main app once location accepted
-        Get.offAll(NavigationMenu());
-      } catch (e) {
-        debugPrint('Error getting position: $e');
-      }
-    }
-
-    isRequestingLocation.value = false;
-  }
-
-  Future<void> recheckLocationPermission() async {
-    // helper to re-evaluate permission/service state without navigation
-    locationServiceEnabled.value = await Geolocator.isLocationServiceEnabled();
-    locationPermission.value = await Geolocator.checkPermission();
-  }
-
   void updatePageIndicator(int index) => {currentPageIndex.value = index};
-
-  void updateLocation(String value) {
-    location = value;
-  }
 
   void updateSelectedSports(List<String> sports) {
     print('Selected sports: $sports');

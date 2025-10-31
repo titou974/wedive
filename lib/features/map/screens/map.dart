@@ -1,3 +1,4 @@
+import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/common/widgets/appbar/appbar.dart';
 import 'package:Wedive/common/widgets/avatar/avatar.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart';
@@ -21,8 +22,21 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  MapboxMap? mapboxMapController;
+  final mapboxController = Get.put(MapController());
+  final localisationController = Get.put(LocalisationController());
+
   @override
+  void initState() {
+    super.initState();
+    mapboxController.setupPositionTracking();
+  }
+
+  @override
+  void dispose() {
+    localisationController.userPositionStream?.cancel();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -35,7 +49,7 @@ class _MapScreenState extends State<MapScreen> {
                 styleUri: dark
                     ? "mapbox://styles/titou97410/cmgj08od800o401sb8psfbo2j"
                     : "mapbox://styles/titou97410/cmgen9jaa00gb01qw7tld6aq5",
-                onMapCreated: onMapCreated,
+                onMapCreated: mapboxController.onMapCreated,
               );
             },
           ),
@@ -83,15 +97,5 @@ class _MapScreenState extends State<MapScreen> {
         ],
       ),
     );
-  }
-
-  void onMapCreated(MapboxMap mapboxMap) {
-    setState(() {
-      mapboxMapController = mapboxMap;
-    });
-    // Disable the scale bar
-    mapboxMap.scaleBar.updateSettings(ScaleBarSettings(enabled: false));
-    // Update the location of the user
-    mapboxMap.location.updateSettings(LocationComponentSettings(enabled: true));
   }
 }

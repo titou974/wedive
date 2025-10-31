@@ -1,3 +1,4 @@
+import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/features/auth/controllers/sign_up_controller.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/divingsport.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/localisation.dart';
@@ -5,15 +6,16 @@ import 'package:Wedive/features/auth/screens/signup/widgets/signupsteps_dots.dar
 import 'package:Wedive/features/auth/screens/signup/widgets/signupstepspage.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 
 class SignupSteps extends StatelessWidget {
   const SignupSteps({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignUpController());
+    final localisationController = Get.put(LocalisationController());
+    final signupController = Get.put(SignUpController());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -21,17 +23,17 @@ class SignupSteps extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: PageView(
-        controller: controller.pageController,
-        onPageChanged: controller.updatePageIndicator,
+        controller: signupController.pageController,
+        onPageChanged: signupController.updatePageIndicator,
         physics: const NeverScrollableScrollPhysics(),
         children: [
           SignupStepsPage(
             title: WediveTextsFr.selectActivitiesTitle,
             subtitle: WediveTextsFr.selectActivitiesSubtitle,
             stepContent: DivingSportPage(
-              selectedSports: controller.selectedSports,
+              selectedSports: signupController.selectedSports,
               onChanged: (sports) {
-                controller.updateSelectedSports(sports);
+                signupController.updateSelectedSports(sports);
               },
             ),
             // footer: continue to next page
@@ -40,7 +42,7 @@ class SignupSteps extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      controller.pageController.nextPage(
+                      signupController.pageController.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.ease,
                       );
@@ -52,26 +54,49 @@ class SignupSteps extends StatelessWidget {
             ),
           ),
           SignupStepsPage(
-            title: WediveTextsFr.locationPermissionTitle,
-            subtitle: WediveTextsFr.locationPermissionSubtitle,
+            title:
+                localisationController.locationPermission.value ==
+                        LocationPermission.deniedForever ||
+                    localisationController.locationPermission.value ==
+                        LocationPermission.denied
+                ? WediveTextsFr.locationPermissionDeniedTitle
+                : WediveTextsFr.locationPermissionTitle,
+            subtitle:
+                localisationController.locationPermission.value ==
+                    LocationPermission.deniedForever
+                ? WediveTextsFr.locationPermissionSubtitleDeniedForever
+                : localisationController.locationPermission.value ==
+                      LocationPermission.denied
+                ? WediveTextsFr.locationPermissionSubtitleDenied
+                : WediveTextsFr.locationPermissionSubtitle,
             stepContent: LocalisationPage(
-              location: controller.location,
-              onChanged: (value) {
-                controller.updateLocation(value);
-              },
+              location: localisationController.location,
             ),
             // footer: request location & proceed (controller handles navigation if configured)
             footerWidget: Row(
               children: [
                 Expanded(
                   child: Obx(() {
-                    final loading = controller.isRequestingLocation.value;
+                    final loading =
+                        localisationController.isRequestingLocation.value;
                     return ElevatedButton(
                       onPressed: loading
                           ? null
-                          : () => controller.requestLocationAndProceed(
-                              context: context,
-                            ),
+                          : () => {
+                              localisationController.requestLocationAndProceed(
+                                context: context,
+                              ),
+
+                              if (localisationController
+                                          .locationPermission
+                                          .value ==
+                                      LocationPermission.always ||
+                                  localisationController
+                                          .locationPermission
+                                          .value ==
+                                      LocationPermission.whileInUse)
+                                {signupController.nextPage()},
+                            },
                       child: loading
                           ? const SizedBox(
                               width: 16,
