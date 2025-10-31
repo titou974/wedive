@@ -4,6 +4,9 @@ import 'package:Wedive/utils/constants/image_strings.dart';
 
 final List<DiveSpot> spots = [
   DiveSpot(
+    id: 1.toString(),
+    latitude: 37.429725,
+    longitude: -122.1,
     imageUrl: WediveImages.spot1,
     title: WediveTextsFr.spot1,
     grade: 8.3,
@@ -15,6 +18,9 @@ final List<DiveSpot> spots = [
     ],
   ),
   DiveSpot(
+    id: 2.toString(),
+    latitude: 37.729725,
+    longitude: -123.1,
     imageUrl: WediveImages.spot2,
     title: 'Cap La Houssaye',
     grade: 9.1,
@@ -26,6 +32,9 @@ final List<DiveSpot> spots = [
     ],
   ),
   DiveSpot(
+    id: 3.toString(),
+    latitude: 37.129725,
+    longitude: -122,
     imageUrl: WediveImages.spot3,
     title: 'Trou d\'Eau',
     grade: 7.8,

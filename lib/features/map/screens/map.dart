@@ -1,13 +1,13 @@
+// features/map/screens/map_screen.dart
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/common/widgets/appbar/topbar.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart';
+import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/infinitycarousel.dart';
 import 'package:Wedive/features/map/screens/widgets/recenterbutton.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:Wedive/utils/constants/lists.dart';
 import 'package:Wedive/features/map/screens/widgets/map.dart';
 
@@ -19,12 +19,15 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  final markerController = Get.put(MarkerController());
   final mapboxController = Get.put(MapController());
   final localisationController = Get.put(LocalisationController());
 
   @override
   void initState() {
     super.initState();
+    // Load spots into marker controller
+    markerController.loadSpots(spots);
   }
 
   @override
@@ -48,7 +51,6 @@ class _MapScreenState extends State<MapScreen> {
             mapboxController: mapboxController,
             localisationController: localisationController,
           ),
-          // Center-on-user button
         ],
       ),
     );
