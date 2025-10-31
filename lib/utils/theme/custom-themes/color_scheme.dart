@@ -11,7 +11,7 @@ class WediveColorScheme {
     secondary: WediveColorsTheme.accentBlue,
     onSecondary: WediveColorsTheme.textWhite,
     surface: WediveColorsTheme.textBlack,
-    onSurface: WediveColorsTheme.textBlack,
+    onSurface: WediveColorsTheme.textWhite,
     error: WediveColorsTheme.errorRed,
     onError: WediveColorsTheme.textWhite,
   );

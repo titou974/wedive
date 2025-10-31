@@ -6,6 +6,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class LocalisationController extends GetxController {
+  static LocalisationController get instance =>
+      Get.find<LocalisationController>();
   String? location;
   LocationSettings locationSettings = LocationSettings(
     accuracy: LocationAccuracy.high,

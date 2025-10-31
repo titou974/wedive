@@ -2,8 +2,8 @@ import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/utils/constants/mapbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mp;
 import 'package:geolocator/geolocator.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mp;
 
 class MapController extends GetxController {
   static MapController get instance => Get.find<MapController>();
@@ -54,13 +54,24 @@ class MapController extends GetxController {
     await localisationController.startPositionStream();
   }
 
-  void _moveCameraToPosition(Position position) {
+  void _moveCameraToPosition(Position position, {bool withAnimation = false}) {
     try {
       final coords = mp.Position(
         position.longitude,
         position.latitude,
       ); // lon, lat
-      debugPrint('Moving camera to: ${coords}');
+      debugPrint('Moving camera t PROUT: ${coords}');
+      // ease to could be used for animation
+      if (withAnimation) {
+        mapboxController?.easeTo(
+          mp.CameraOptions(
+            center: mp.Point(coordinates: coords),
+            zoom: MapboxConstants.defaultZoomLevel,
+          ),
+          mp.MapAnimationOptions(duration: 2000),
+        );
+        return;
+      }
       mapboxController?.setCamera(
         mp.CameraOptions(
           center: mp.Point(coordinates: coords),
@@ -70,6 +81,16 @@ class MapController extends GetxController {
     } catch (e) {
       debugPrint('Error moving camera: $e');
     }
+  }
+
+  // Recenter map to current user position (if available)
+  void recenterToUser() {
+    final pos = localisationController.currentPosition.value;
+    if (pos == null || mapboxController == null) {
+      debugPrint('recenterToUser: no position or map not ready');
+      return;
+    }
+    _moveCameraToPosition(pos, withAnimation: true);
   }
 
   @override
