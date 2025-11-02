@@ -62,7 +62,7 @@ class LocalisationController extends GetxController {
         );
         currentPosition.value = pos;
         location = '${pos.latitude},${pos.longitude}';
-
+        debugPrint('Obtained position: ${pos.latitude}, ${pos.longitude}');
         if (navigateOnSuccess) {
           // Only navigate when explicitly requested (so other callers won't be redirected)
           Get.offAll(NavigationMenu());

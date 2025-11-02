@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 class RecenterButton extends StatelessWidget {
   const RecenterButton({
     super.key,
-    required this.mapboxController,
+    // required this.mapboxController,
     required this.localisationController,
   });
-  final MapController mapboxController;
+  // final MapController mapboxController;
   final LocalisationController localisationController;
 
   @override
@@ -18,7 +18,7 @@ class RecenterButton extends StatelessWidget {
       right: WediveSizes.md,
       bottom: 280,
       child: ElevatedButton(
-        onPressed: () => mapboxController.recenterToUser(),
+        onPressed: () => {},
         style: ElevatedButton.styleFrom(
           shape: CircleBorder(),
           minimumSize: const Size(36, 36),

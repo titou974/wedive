@@ -2,6 +2,8 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/common/widgets/appbar/topbar.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart';
+import 'package:Wedive/features/map/controllers/map_controller.dart'
+    as app_map_ctrl;
 import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/infinitycarousel.dart';
 import 'package:Wedive/features/map/screens/widgets/recenterbutton.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:Wedive/utils/constants/lists.dart';
 import 'package:Wedive/features/map/screens/widgets/map.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -20,14 +23,24 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final markerController = Get.put(MarkerController());
-  final mapboxController = Get.put(MapController());
   final localisationController = Get.put(LocalisationController());
-
+  final appMapController = Get.put(app_map_ctrl.MapController());
   @override
   void initState() {
     super.initState();
     // Load spots into marker controller
     markerController.loadSpots(spots);
+    // ensure we request permission and start the position stream for the map
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final granted = await localisationController.requestLocationAndProceed(
+        navigateOnSuccess: false,
+      );
+      if (granted) {
+        await localisationController.startPositionStream();
+      } else {
+        // permission/service not available — UI will show messages on the localisation page
+      }
+    });
   }
 
   @override
@@ -41,16 +54,16 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Map(mapboxController: mapboxController),
+          Map(
+            appMapController: appMapController,
+            localisationController: localisationController,
+          ),
           WeDiveTopBar(
             cityName: "Saint Gilles Les Bains, Réunion",
             imageUserUrl: WediveImages.profilePictureUser,
           ),
           InfinityCarousel(spots: spots),
-          RecenterButton(
-            mapboxController: mapboxController,
-            localisationController: localisationController,
-          ),
+          RecenterButton(localisationController: localisationController),
         ],
       ),
     );
