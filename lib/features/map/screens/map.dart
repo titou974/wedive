@@ -1,6 +1,7 @@
 // features/map/screens/map_screen.dart
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/common/widgets/appbar/topbar.dart';
+import 'package:Wedive/features/map/controllers/animation_controller.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart'
     as app_map_ctrl;
@@ -12,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:Wedive/utils/constants/lists.dart';
 import 'package:Wedive/features/map/screens/widgets/map.dart';
-import 'package:geolocator/geolocator.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -25,6 +25,7 @@ class _MapScreenState extends State<MapScreen> {
   final markerController = Get.put(MarkerController());
   final localisationController = Get.put(LocalisationController());
   final appMapController = Get.put(app_map_ctrl.MapController());
+  final animationController = Get.put(UserMarkerAnimationController());
   @override
   void initState() {
     super.initState();
@@ -57,6 +58,7 @@ class _MapScreenState extends State<MapScreen> {
           Map(
             appMapController: appMapController,
             localisationController: localisationController,
+            animationController: animationController,
           ),
           WeDiveTopBar(
             cityName: "Saint Gilles Les Bains, Réunion",

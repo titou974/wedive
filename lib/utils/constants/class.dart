@@ -1,4 +1,6 @@
 // utils/constants/class.dart
+import 'package:latlong2/latlong.dart';
+
 class DiveSpot {
   final String id; // Add unique identifier
   final String title;
@@ -6,8 +8,7 @@ class DiveSpot {
   final int divers;
   final List<String> diversAvatars;
   final double grade;
-  final double latitude;
-  final double longitude;
+  final LatLng location;
 
   DiveSpot({
     required this.id,
@@ -16,7 +17,6 @@ class DiveSpot {
     required this.divers,
     required this.diversAvatars,
     required this.grade,
-    required this.latitude,
-    required this.longitude,
+    required this.location,
   });
 }

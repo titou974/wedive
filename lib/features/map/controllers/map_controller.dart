@@ -67,13 +67,13 @@ class MapController extends GetxController {
   }
 
   /// Move the map to a DiveSpot
-  void moveToSpot(DiveSpot spot, {double zoom = 5.0}) {
+  void moveToSpot(DiveSpot spot, {double zoom = 14.0}) {
     if (flutterMapController == null) {
       debugPrint('moveToSpot: flutterMapController not bound yet');
       return;
     }
     try {
-      flutterMapController!.move(LatLng(spot.latitude, spot.longitude), zoom);
+      flutterMapController!.move(spot.location, zoom);
     } catch (e) {
       debugPrint('moveToSpot error: $e');
     }
