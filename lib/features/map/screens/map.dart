@@ -23,7 +23,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final markerController = Get.put(MarkerController());
   final localisationController = Get.put(LocalisationController());
-  final appMapController = Get.put(app_map_ctrl.MapController());
+  final mapController = Get.put(app_map_ctrl.MapController());
   final animationController = Get.put(UserMarkerAnimationController());
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _MapScreenState extends State<MapScreen> {
       body: Stack(
         children: [
           Map(
-            appMapController: appMapController,
+            mapController: mapController,
             localisationController: localisationController,
             animationController: animationController,
             markerList: markerController.markerList,

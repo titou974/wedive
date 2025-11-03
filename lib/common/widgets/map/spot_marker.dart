@@ -1,3 +1,4 @@
+import 'package:Wedive/common/widgets/map/marker.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -20,25 +21,27 @@ class SpotMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // AnimatedContainer will animate width/height when `size` changes
+    // avatar radius depends on actual rendered size
     final avatarRadius = size * 0.37; // tweak to fit inside SVG marker
+
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
         width: size,
         height: size,
+        // AnimatedContainer must animate the width/height properties
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 800),
           curve: Curves.easeInOut,
           width: size,
           height: size,
           child: Stack(
             alignment: Alignment.center,
             children: [
-              SvgPicture.asset(
-                isSelected
-                    ? WediveImages.marketSelectedSvg
-                    : WediveImages.markerSvg,
+              MarkerSvg(
+                color: isSelected
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.onPrimary,
                 width: size,
                 height: size,
               ),
@@ -46,9 +49,13 @@ class SpotMarker extends StatelessWidget {
                 top:
                     size *
                     0.06, // adjust to visually center the avatar inside marker
-                child: CircleAvatar(
-                  radius: avatarRadius,
-                  backgroundImage: AssetImage(imagePath),
+                child: ClipOval(
+                  child: Image.asset(
+                    imagePath,
+                    width: avatarRadius * 2,
+                    height: avatarRadius * 2,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],

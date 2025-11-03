@@ -5,21 +5,22 @@ import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart' as fm;
+import 'package:flutter_map_animations/flutter_map_animations.dart'
+    as fm_animation;
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:Wedive/utils/constants/lists.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart'
-    as app_map_ctrl;
+    as map_controller;
 
 class Map extends StatefulWidget {
   const Map({
     super.key,
-    required this.appMapController,
+    required this.mapController,
     required this.localisationController,
     required this.animationController,
     required this.markerList,
   });
-  final app_map_ctrl.MapController appMapController;
+  final map_controller.MapController mapController;
   final LocalisationController localisationController;
   final UserMarkerAnimationController animationController;
   final RxList<fm.Marker> markerList;
@@ -28,9 +29,14 @@ class Map extends StatefulWidget {
   State<Map> createState() => _MapState();
 }
 
-class _MapState extends State<Map> {
+class _MapState extends State<Map> with TickerProviderStateMixin {
   String get accessToken => dotenv.env['MAPBOX_ACCESS_TOKEN'] ?? '';
-  final flutterMapController = fm.MapController();
+  late final flutterMapController = fm_animation.AnimatedMapController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1000),
+    curve: Curves.easeOut,
+    cancelPreviousAnimations: true,
+  );
 
   @override
   void initState() {
@@ -53,15 +59,13 @@ class _MapState extends State<Map> {
     return fm.FlutterMap(
       options: fm.MapOptions(
         onMapReady: () {
-          widget.appMapController.bindFlutterMapController(
-            flutterMapController,
-          );
+          widget.mapController.bindFlutterMapController(flutterMapController);
         },
         initialCenter: LatLng(pos?.latitude ?? 0.0, pos?.longitude ?? 0.0),
         minZoom: 3,
         maxZoom: 18,
       ),
-      mapController: flutterMapController,
+      mapController: flutterMapController.mapController,
       children: [
         fm.TileLayer(
           urlTemplate: dark
@@ -80,7 +84,7 @@ class _MapState extends State<Map> {
 
           return AnimatedUserMarker(
             position: LatLng(pos.latitude, pos.longitude),
-            primaryColor: Theme.of(context).colorScheme.secondary,
+            primaryColor: Theme.of(context).colorScheme.primary,
             borderColor: Theme.of(context).colorScheme.onPrimary,
           );
         }),

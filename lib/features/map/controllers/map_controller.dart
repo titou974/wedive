@@ -6,6 +6,8 @@ import 'package:Wedive/utils/constants/class.dart'; // DiveSpot
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_map_animations/flutter_map_animations.dart'
+    as fm_animation;
 import 'package:flutter_map/flutter_map.dart' as fm;
 import 'package:latlong2/latlong.dart';
 
@@ -17,6 +19,8 @@ class MapController extends GetxController {
   final MarkerController markerController = Get.find<MarkerController>();
 
   fm.MapController? flutterMapController;
+  fm_animation.AnimatedMapController? animatedMapController;
+
   final RxBool mapReady = false.obs;
 
   StreamSubscription<Position?>? _posSub;
@@ -27,22 +31,22 @@ class MapController extends GetxController {
     // react to localisation updates
     _posSub = localisationController.currentPosition.listen((pos) {
       if (pos == null) return;
-      if (flutterMapController != null) {
+      if (animatedMapController != null) {
         moveToPosition(pos);
       }
     });
 
     // react to selected spot changes (when a marker is selected elsewhere)
     markerController.selectedSpot.listen((spot) {
-      if (spot != null && flutterMapController != null) {
+      if (spot != null && animatedMapController != null) {
         moveToSpot(spot);
       }
     });
   }
 
   /// Bind the flutter_map controller instance once the map is created.
-  void bindFlutterMapController(fm.MapController controller) {
-    flutterMapController = controller;
+  void bindFlutterMapController(fm_animation.AnimatedMapController controller) {
+    animatedMapController = controller;
     mapReady.value = true;
 
     // If we already have a last-known position and follow is enabled, recenter
@@ -55,12 +59,15 @@ class MapController extends GetxController {
   /// Move the map to a geolocated [Position]
   /// Uses instant move; you can replace with animated logic if you add an animated controller.
   void moveToPosition(Position pos, {double zoom = 10.0}) {
-    if (flutterMapController == null) {
-      debugPrint('moveToPosition: flutterMapController not bound yet');
+    if (animatedMapController == null) {
+      debugPrint('moveToPosition: animatedMapController not bound yet');
       return;
     }
     try {
-      flutterMapController!.move(LatLng(pos.latitude, pos.longitude), zoom);
+      animatedMapController!.animateTo(
+        dest: LatLng(pos.latitude, pos.longitude),
+        zoom: zoom,
+      );
     } catch (e) {
       debugPrint('moveToPosition error: $e');
     }
@@ -68,12 +75,12 @@ class MapController extends GetxController {
 
   /// Move the map to a DiveSpot
   void moveToSpot(DiveSpot spot, {double zoom = 10.0}) {
-    if (flutterMapController == null) {
-      debugPrint('moveToSpot: flutterMapController not bound yet');
+    if (animatedMapController == null) {
+      debugPrint('moveToSpot: animatedMapController not bound yet');
       return;
     }
     try {
-      flutterMapController!.move(spot.location, zoom);
+      animatedMapController!.animateTo(dest: spot.location, zoom: zoom);
     } catch (e) {
       debugPrint('moveToSpot error: $e');
     }
@@ -92,7 +99,7 @@ class MapController extends GetxController {
   @override
   void onClose() {
     _posSub?.cancel();
-    flutterMapController = null;
+    animatedMapController = null;
     super.onClose();
   }
 }
