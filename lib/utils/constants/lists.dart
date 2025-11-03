@@ -1,7 +1,15 @@
+import 'package:Wedive/common/widgets/map/spot_marker.dart';
+import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/utils/constants/class.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/image_strings.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
+
+final markerController = Get.find<MarkerController>();
 
 final List<DiveSpot> spots = [
   DiveSpot(
@@ -45,3 +53,27 @@ final List<DiveSpot> spots = [
   ),
   // Add more spots as needed
 ];
+
+class MarkerList {
+  // make public
+  List<Marker> buildMarkers() {
+    final markerList = <Marker>[];
+    for (int i = 0; i < spots.length; i++) {
+      final mapItem = spots[i];
+      final isSelected = markerController.selectedSpot.value?.id == mapItem.id;
+      markerList.add(
+        SpotMarker.toMarker(
+          imagePath: mapItem.imageUrl,
+          onTap: () {
+            debugPrint('Marker ${mapItem.id} tapped!');
+            markerController.selectSpot(mapItem);
+          },
+          point: mapItem.location,
+          isSelected: isSelected,
+          size: isSelected ? 60.0 : 50.0,
+        ),
+      );
+    }
+    return markerList;
+  }
+}

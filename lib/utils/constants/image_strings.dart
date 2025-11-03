@@ -41,4 +41,6 @@ class WediveImages {
   static const String avatar3 = "assets/images/users/diver3.webp";
 
   static const String markerSvg = "assets/images/marker.svg";
+
+  static const String marketSelectedSvg = "assets/images/marker_selected.svg";
 }

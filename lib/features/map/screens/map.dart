@@ -5,7 +5,6 @@ import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:Wedive/utils/constants/lists.dart';
 import 'package:Wedive/features/map/screens/widgets/map.dart';
 import 'package:Wedive/common/controllers/localisation_controller.dart';
-import 'package:Wedive/features/map/controllers/map_controller.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart'
     as app_map_ctrl;
 import 'package:Wedive/features/map/controllers/animation_controller.dart';
@@ -59,8 +58,8 @@ class _MapScreenState extends State<MapScreen> {
             appMapController: appMapController,
             localisationController: localisationController,
             animationController: animationController,
+            markerList: markerController.markerList,
           ),
-          // observe reactive city/country and show top bar when available
           Obx(() {
             final city = localisationController.cityName;
             final country = localisationController.countryName;

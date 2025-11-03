@@ -54,7 +54,7 @@ class MapController extends GetxController {
 
   /// Move the map to a geolocated [Position]
   /// Uses instant move; you can replace with animated logic if you add an animated controller.
-  void moveToPosition(Position pos, {double zoom = 14.0}) {
+  void moveToPosition(Position pos, {double zoom = 10.0}) {
     if (flutterMapController == null) {
       debugPrint('moveToPosition: flutterMapController not bound yet');
       return;
@@ -67,7 +67,7 @@ class MapController extends GetxController {
   }
 
   /// Move the map to a DiveSpot
-  void moveToSpot(DiveSpot spot, {double zoom = 14.0}) {
+  void moveToSpot(DiveSpot spot, {double zoom = 10.0}) {
     if (flutterMapController == null) {
       debugPrint('moveToSpot: flutterMapController not bound yet');
       return;
