@@ -2,17 +2,25 @@ import 'dart:async';
 
 import 'package:Wedive/navigation_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class LocalisationController extends GetxController {
   static LocalisationController get instance =>
       Get.find<LocalisationController>();
+
   String? location;
+
+  // ✅ Déclarer comme RxnString (nullable reactive string)
+  final RxnString cityName = RxnString();
+  final RxnString countryName = RxnString();
+
   LocationSettings locationSettings = LocationSettings(
     accuracy: LocationAccuracy.high,
     distanceFilter: 10,
   );
+
   RxBool isRequestingLocation = false.obs;
   Rx<LocationPermission?> locationPermission = Rxn<LocationPermission>();
   RxBool locationServiceEnabled = false.obs;
@@ -21,6 +29,10 @@ class LocalisationController extends GetxController {
   Rxn<Position> currentPosition = Rxn<Position>();
 
   StreamSubscription? userPositionStream;
+
+  // ✅ Pour throttling du geocoding
+  DateTime? _lastGeocodingCall;
+  static const _geocodingThrottle = Duration(seconds: 30);
 
   void updateLocation(String value) {
     location = value;
@@ -63,8 +75,11 @@ class LocalisationController extends GetxController {
         currentPosition.value = pos;
         location = '${pos.latitude},${pos.longitude}';
         debugPrint('Obtained position: ${pos.latitude}, ${pos.longitude}');
+
+        // ✅ Mettre à jour le placemark
+        await _updatePlacemark(pos);
+
         if (navigateOnSuccess) {
-          // Only navigate when explicitly requested (so other callers won't be redirected)
           Get.offAll(NavigationMenu());
           isRequestingLocation.value = false;
           return true;
@@ -80,18 +95,48 @@ class LocalisationController extends GetxController {
     return false;
   }
 
+  // ✅ Méthode corrigée pour mettre à jour le placemark
+  Future<void> _updatePlacemark(Position pos) async {
+    // ✅ Throttle pour éviter trop d'appels
+    final now = DateTime.now();
+    if (_lastGeocodingCall != null &&
+        now.difference(_lastGeocodingCall!) < _geocodingThrottle) {
+      return; // Ignorer cet appel
+    }
+
+    _lastGeocodingCall = now;
+
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        pos.latitude,
+        pos.longitude,
+      );
+      if (placemarks.isNotEmpty) {
+        final placemark = placemarks.first;
+        cityName.value = placemark.locality ?? placemark.subAdministrativeArea;
+        countryName.value = placemark.country;
+        debugPrint(
+          'Updated placemark: ${cityName.value}, ${countryName.value}',
+        );
+      }
+    } catch (e) {
+      debugPrint('Error getting placemark: $e');
+    }
+  }
+
   Future<void> startPositionStream() async {
-    // cancel any existing stream
     await userPositionStream?.cancel();
-    // only start if permission ok
+
     if (locationPermission.value == LocationPermission.always ||
         locationPermission.value == LocationPermission.whileInUse) {
       userPositionStream =
           Geolocator.getPositionStream(
             locationSettings: locationSettings,
-          ).listen((Position? pos) {
+          ).listen((Position? pos) async {
             if (pos != null) {
               currentPosition.value = pos;
+              // Mettre à jour le placemark (throttled)
+              await _updatePlacemark(pos);
             }
           });
     }
@@ -103,7 +148,6 @@ class LocalisationController extends GetxController {
   }
 
   Future<void> recheckLocationPermission() async {
-    // helper to re-evaluate permission/service state without navigation
     locationServiceEnabled.value = await Geolocator.isLocationServiceEnabled();
     locationPermission.value = await Geolocator.checkPermission();
   }
