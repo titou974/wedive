@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/utils/constants/class.dart'; // DiveSpot
+import 'package:Wedive/utils/constants/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
@@ -58,7 +59,10 @@ class MapController extends GetxController {
 
   /// Move the map to a geolocated [Position]
   /// Uses instant move; you can replace with animated logic if you add an animated controller.
-  void moveToPosition(Position pos, {double zoom = 10.0}) {
+  void moveToPosition(
+    Position pos, {
+    double zoom = FlutterMapConstants.defaultZoomLevel,
+  }) {
     if (animatedMapController == null) {
       debugPrint('moveToPosition: animatedMapController not bound yet');
       return;
@@ -74,7 +78,10 @@ class MapController extends GetxController {
   }
 
   /// Move the map to a DiveSpot
-  void moveToSpot(DiveSpot spot, {double zoom = 10.0}) {
+  void moveToSpot(
+    DiveSpot spot, {
+    double zoom = FlutterMapConstants.defaultZoomLevel,
+  }) {
     if (animatedMapController == null) {
       debugPrint('moveToSpot: animatedMapController not bound yet');
       return;
@@ -87,7 +94,7 @@ class MapController extends GetxController {
   }
 
   /// Recenters on current user position (if available)
-  void recenterToUser({double zoom = 14.0}) {
+  void recenterToUser({double zoom = FlutterMapConstants.defaultZoomLevel}) {
     final pos = localisationController.currentPosition.value;
     if (pos == null) {
       debugPrint('recenterToUser: no current position available');

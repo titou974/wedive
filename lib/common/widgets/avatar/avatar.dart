@@ -1,5 +1,4 @@
 import 'package:Wedive/utils/constants/sizes.dart';
-import 'package:Wedive/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
@@ -19,7 +18,9 @@ class Avatar extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: WediveColorsTheme.secondaryBlue, // Accent blue border
+              color: Theme.of(
+                context,
+              ).colorScheme.tertiary, // Accent blue border
               width: 2,
             ),
           ),

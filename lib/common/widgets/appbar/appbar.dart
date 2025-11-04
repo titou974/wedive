@@ -1,3 +1,4 @@
+import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:Wedive/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class WediveAppBar extends StatelessWidget implements PreferredSizeWidget {
             : null,
         title: title,
         actions: actions,
-        backgroundColor: Colors.transparent,
+        backgroundColor: WediveColorsTheme.transparent,
       ),
     );
   }

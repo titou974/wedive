@@ -1,8 +1,6 @@
 import 'package:Wedive/features/auth/screens/signup/signupsteps.dart';
-import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
-import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -12,7 +10,6 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = WeDiveHelperFunctions.isDarkMode(context);
     return Form(
       child: Column(
         children: [
@@ -58,13 +55,11 @@ class SignupForm extends StatelessWidget {
                       TextSpan(
                         text: '${WediveTextsFr.termsOfService} ',
                         style: Theme.of(context).textTheme.labelMedium!.apply(
-                          color: dark
-                              ? WediveColorsTheme.textWhite
-                              : WediveColorsTheme.primaryBlue,
+                          color: Theme.of(context).colorScheme.primary,
                           decoration: TextDecoration.underline,
-                          decorationColor: dark
-                              ? WediveColorsTheme.textWhite
-                              : WediveColorsTheme.primaryBlue,
+                          decorationColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
                         ),
                       ),
                       TextSpan(
@@ -74,13 +69,11 @@ class SignupForm extends StatelessWidget {
                       TextSpan(
                         text: WediveTextsFr.privacyPolicy,
                         style: Theme.of(context).textTheme.labelMedium!.apply(
-                          color: dark
-                              ? WediveColorsTheme.textWhite
-                              : WediveColorsTheme.primaryBlue,
+                          color: Theme.of(context).colorScheme.primary,
                           decoration: TextDecoration.underline,
-                          decorationColor: dark
-                              ? WediveColorsTheme.textWhite
-                              : WediveColorsTheme.primaryBlue,
+                          decorationColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
                         ),
                       ),
                     ],

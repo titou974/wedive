@@ -1,4 +1,5 @@
 import 'package:Wedive/utils/constants/colors.dart';
+import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class WediveOutlinedButtonTheme {
@@ -9,10 +10,13 @@ class WediveOutlinedButtonTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: WediveColorsTheme.accentBlue,
           side: const BorderSide(color: WediveColorsTheme.accentBlue),
-          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: TextStyle(
+            fontSize: WediveSizes.fontSizeMd,
+            fontWeight: FontWeight.bold,
+          ),
           minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(WediveSizes.buttonRadius),
           ),
         ),
       );
@@ -22,10 +26,13 @@ class WediveOutlinedButtonTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: WediveColorsTheme.textWhite,
           side: const BorderSide(color: WediveColorsTheme.textWhite),
-          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: TextStyle(
+            fontSize: WediveSizes.fontSizeMd,
+            fontWeight: FontWeight.bold,
+          ),
           minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(WediveSizes.buttonRadius),
           ),
         ),
       );

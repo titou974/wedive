@@ -91,10 +91,10 @@ class _DivingSportPageState extends State<DivingSportPage> {
             border: Border.all(
               color: isChecked
                   ? Theme.of(context).colorScheme.primary
-                  : Colors.transparent,
+                  : Theme.of(context).colorScheme.surfaceContainer,
               width: 2,
             ),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(WediveSizes.cardRadiusMd),
           ),
           child: CheckboxListTile(
             value: isChecked,
@@ -144,7 +144,7 @@ class _DivingSportPageState extends State<DivingSportPage> {
               ),
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(WediveSizes.cardRadiusMd),
             ),
             controlAffinity: ListTileControlAffinity.leading,
           ),

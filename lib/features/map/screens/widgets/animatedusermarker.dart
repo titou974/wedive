@@ -35,9 +35,9 @@ class AnimatedUserMarker extends StatelessWidget {
               circles: [
                 fm.CircleMarker(
                   point: position,
-                  color: primary.withOpacity(opacityValue * 0.6),
+                  color: primary.withValues(alpha: opacityValue * 0.6),
                   borderStrokeWidth: 1,
-                  borderColor: primary.withOpacity(opacityValue * 0.3),
+                  borderColor: primary.withValues(alpha: opacityValue * 0.3),
                   radius: 6 + (25 * pulseValue),
                 ),
               ],
@@ -60,7 +60,7 @@ class AnimatedUserMarker extends StatelessWidget {
               circles: [
                 fm.CircleMarker(
                   point: position,
-                  color: primary.withOpacity(delayedOpacity * 0.4),
+                  color: primary.withValues(alpha: delayedOpacity * 0.4),
                   borderStrokeWidth: 0,
                   radius: 6 + (25 * delayedPulse),
                 ),
@@ -73,7 +73,7 @@ class AnimatedUserMarker extends StatelessWidget {
           circles: [
             fm.CircleMarker(
               point: position,
-              color: primary.withOpacity(0.8),
+              color: primary.withValues(alpha: 0.8),
               borderStrokeWidth: 2.5,
               borderColor: border,
               radius: 10,

@@ -1,3 +1,4 @@
+import 'package:Wedive/utils/constants/map.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class UserMarkerAnimationController extends GetxController
   void _initAnimations() {
     // Animation principale qui tourne en boucle
     pulseController = AnimationController(
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: FlutterMapConstants.duration),
       vsync: this,
     )..repeat();
 
@@ -34,14 +35,14 @@ class UserMarkerAnimationController extends GetxController
           begin: 1.0,
           end: 1.3,
         ).chain(CurveTween(curve: Curves.easeInOut)),
-        weight: 50,
+        weight: FlutterMapConstants.animationWeight,
       ),
       TweenSequenceItem(
         tween: Tween<double>(
           begin: 1.3,
           end: 1.0,
         ).chain(CurveTween(curve: Curves.bounceOut)),
-        weight: 50,
+        weight: FlutterMapConstants.animationWeight,
       ),
     ]).animate(pulseController);
 

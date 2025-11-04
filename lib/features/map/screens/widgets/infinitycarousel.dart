@@ -1,7 +1,8 @@
-// features/map/screens/widgets/infinitycarousel.dart
 import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/utils/constants/class.dart';
 import 'package:Wedive/utils/constants/colors.dart';
+import 'package:Wedive/utils/constants/fr_strings.dart';
+import 'package:Wedive/utils/constants/map.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,15 +31,17 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
       right: 0,
       bottom: WediveSizes.spaceBtwSections,
       child: SizedBox(
-        height: 240,
+        height: FlutterMapConstants.carouselHeight,
         child: CarouselView(
           controller: carouselController,
-          itemExtent: 160,
-          shrinkExtent: 160,
+          itemExtent: FlutterMapConstants.carouselExtent,
+          shrinkExtent: FlutterMapConstants.carouselExtent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(WediveSizes.cardRadiusLg),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 6),
+          padding: const EdgeInsets.symmetric(
+            horizontal: WediveSizes.carouselPadding,
+          ),
           onTap: (index) {
             // Select spot when tapped
             markerController.selectSpot(widget.spots![index]);
@@ -53,13 +56,20 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
               return GestureDetector(
                 onTap: () => markerController.selectSpot(spot),
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
+                  duration: const Duration(
+                    milliseconds:
+                        FlutterMapConstants.carouselBorderColorDuration,
+                  ),
                   // keep outer radius for shadow/animation
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(
+                      WediveSizes.cardRadiusLg,
+                    ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.shadow.withValues(alpha: 0.1),
                         blurRadius: 6,
                         offset: const Offset(0, 2),
                       ),
@@ -70,12 +80,19 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                     children: [
                       // image clipped to same radius so it won't overflow corners
                       AnimatedScale(
-                        scale: isSelected ? 1.1 : 1.0,
-                        duration: const Duration(milliseconds: 500),
+                        scale: isSelected
+                            ? FlutterMapConstants.animatedImageScale
+                            : 1.0,
+                        duration: const Duration(
+                          milliseconds:
+                              FlutterMapConstants.carouselZoomDuration,
+                        ),
                         curve: Curves.easeInOut,
                         alignment: Alignment.center,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(
+                            WediveSizes.cardRadiusLg,
+                          ),
                           child: Image.asset(
                             spot.imageUrl,
                             fit: BoxFit.cover,
@@ -97,8 +114,12 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                         child: IgnorePointer(
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.20),
-                              borderRadius: BorderRadius.circular(20),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.shadow.withValues(alpha: 0.20),
+                              borderRadius: BorderRadius.circular(
+                                WediveSizes.cardRadiusLg,
+                              ),
                             ),
                           ),
                         ),
@@ -109,14 +130,19 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                       Positioned.fill(
                         child: IgnorePointer(
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
+                            duration: const Duration(
+                              milliseconds: FlutterMapConstants
+                                  .carouselBorderColorDuration,
+                            ),
                             curve: Curves.easeInOut,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(
+                                WediveSizes.cardRadiusLg,
+                              ),
                               border: Border.all(
                                 color: isSelected
                                     ? Theme.of(context).colorScheme.secondary
-                                    : Colors.transparent,
+                                    : WediveColorsTheme.transparent,
                                 width: 3,
                               ),
                             ),
@@ -134,11 +160,16 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                               spot.title,
                               style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
-                                    color: Colors.white,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
                                     fontWeight: FontWeight.bold,
                                     shadows: [
                                       Shadow(
-                                        color: Colors.black.withOpacity(0.7),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .shadow
+                                            .withValues(alpha: 0.7),
                                         blurRadius: 6,
                                         offset: const Offset(0, 2),
                                       ),
@@ -147,13 +178,21 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                             ),
                             const SizedBox(height: WediveSizes.sm),
                             Text(
-                              '+${spot.divers} plongeurs',
+                              WediveTextsFr.diversCount.replaceFirst(
+                                '{count}',
+                                spot.divers.toString(),
+                              ),
                               style: Theme.of(context).textTheme.labelSmall
                                   ?.copyWith(
-                                    color: Colors.white,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
                                     shadows: [
                                       Shadow(
-                                        color: Colors.black.withOpacity(0.7),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .shadow
+                                            .withValues(alpha: 0.7),
                                         blurRadius: 6,
                                         offset: const Offset(0, 2),
                                       ),
@@ -175,7 +214,9 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                                       child: CircleAvatar(
                                         radius: 6,
                                         backgroundImage: AssetImage(avatarUrl),
-                                        backgroundColor: Colors.grey[300],
+                                        backgroundColor: Theme.of(
+                                          context,
+                                        ).colorScheme.surfaceContainer,
                                       ),
                                     );
                                   })
@@ -191,11 +232,13 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                           width: 36,
                           height: 36,
                           decoration: BoxDecoration(
-                            color: WediveColorsTheme.secondaryBlue,
+                            color: Theme.of(context).colorScheme.tertiary,
                             borderRadius: BorderRadius.circular(8),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.15),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.shadow.withValues(alpha: 0.15),
                                 blurRadius: 4,
                                 offset: const Offset(0, 2),
                               ),
@@ -206,7 +249,9 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
                             spot.grade.toStringAsFixed(1),
                             style: Theme.of(context).textTheme.bodySmall
                                 ?.copyWith(
-                                  color: Colors.white,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),

@@ -1,6 +1,7 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/features/map/controllers/animation_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/animatedusermarker.dart';
+import 'package:Wedive/utils/constants/map.dart';
 import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -33,9 +34,11 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
   String get accessToken => dotenv.env['MAPBOX_ACCESS_TOKEN'] ?? '';
   late final flutterMapController = fm_animation.AnimatedMapController(
     vsync: this,
-    duration: const Duration(milliseconds: 1000),
-    curve: Curves.easeOut,
-    cancelPreviousAnimations: true,
+    duration: const Duration(
+      milliseconds: FlutterMapConstants.mapTransitionDuration,
+    ),
+    curve: FlutterMapConstants.mapTransitionCurve,
+    cancelPreviousAnimations: FlutterMapConstants.cancelPreviousMapAnimations,
   );
 
   @override
@@ -61,16 +64,25 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
         onMapReady: () {
           widget.mapController.bindFlutterMapController(flutterMapController);
         },
-        initialCenter: LatLng(pos?.latitude ?? 0.0, pos?.longitude ?? 0.0),
-        minZoom: 3,
-        maxZoom: 18,
+        initialCenter: LatLng(
+          pos?.latitude ?? FlutterMapConstants.defaultLatitude,
+          pos?.longitude ?? FlutterMapConstants.defaultLongitude,
+        ),
+        minZoom: FlutterMapConstants.minZoomLevel,
+        maxZoom: FlutterMapConstants.maxZoomLevel,
       ),
       mapController: flutterMapController.mapController,
       children: [
         fm.TileLayer(
           urlTemplate: dark
-              ? "https://api.mapbox.com/styles/v1/titou97410/cmgj08od800o401sb8psfbo2j/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}"
-              : "https://api.mapbox.com/styles/v1/titou97410/cmgen9jaa00gb01qw7tld6aq5/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}",
+              ? FlutterMapConstants.darkMapTheme.replaceFirst(
+                  "{accessToken}",
+                  accessToken,
+                )
+              : FlutterMapConstants.lightMapTheme.replaceFirst(
+                  "{accessToken}",
+                  accessToken,
+                ),
           additionalOptions: {'accessToken': accessToken},
         ),
         // reactive marker layer — rebuild when markerList changes

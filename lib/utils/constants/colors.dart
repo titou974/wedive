@@ -26,4 +26,6 @@ class WediveColorsTheme {
   static const Color textDarkGrey = Color(0xFF424242); // Darker
   static const Color transparent = Colors.transparent; // Transparent color
   static const Color errorRed = Colors.red;
+
+  static const Color borderGrey = Colors.grey; // Border color
 }

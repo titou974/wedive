@@ -1,4 +1,3 @@
-import 'package:Wedive/utils/constants/colors.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,8 +11,12 @@ class SocialButtons extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: WediveColorsTheme.textLightGrey),
-            borderRadius: BorderRadius.circular(100),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.surfaceContainer,
+            ),
+            borderRadius: BorderRadius.circular(
+              WediveSizes.roundedButtonRadius,
+            ),
           ),
           child: IconButton(
             onPressed: () {},
@@ -27,8 +30,12 @@ class SocialButtons extends StatelessWidget {
         const SizedBox(width: WediveSizes.spaceBtwItems),
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: WediveColorsTheme.textLightGrey),
-            borderRadius: BorderRadius.circular(100),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.surfaceContainer,
+            ),
+            borderRadius: BorderRadius.circular(
+              WediveSizes.roundedButtonRadius,
+            ),
           ),
           child: IconButton(
             onPressed: () {},

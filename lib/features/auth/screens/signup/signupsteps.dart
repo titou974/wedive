@@ -47,7 +47,7 @@ class SignupSteps extends StatelessWidget {
                         curve: Curves.ease,
                       );
                     },
-                    child: const Text('Continuer'),
+                    child: const Text(WediveTextsFr.next),
                   ),
                 ),
               ],
@@ -94,7 +94,7 @@ class SignupSteps extends StatelessWidget {
                               height: 16,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
-                          : const Text('Autoriser et continuer'),
+                          : const Text(WediveTextsFr.next),
                     );
                   }),
                 ),

@@ -1,4 +1,5 @@
 import 'package:Wedive/utils/constants/colors.dart';
+import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class WediveTextFieldTheme {
@@ -8,11 +9,14 @@ class WediveTextFieldTheme {
     filled: true,
     fillColor: Colors.grey.shade100,
     errorMaxLines: 3,
-    prefixIconColor: Colors.grey,
-    suffixIconColor: Colors.grey,
-    labelStyle: TextStyle().copyWith(fontSize: 14, color: Colors.grey),
+    prefixIconColor: WediveColorsTheme.borderGrey,
+    suffixIconColor: WediveColorsTheme.borderGrey,
+    labelStyle: TextStyle().copyWith(
+      fontSize: WediveSizes.fontSizeSm,
+      color: WediveColorsTheme.borderGrey,
+    ),
     hintStyle: TextStyle().copyWith(
-      fontSize: 14,
+      fontSize: WediveSizes.fontSizeSm,
       color: WediveColorsTheme.textBlack,
     ),
     errorStyle: TextStyle().copyWith(fontStyle: FontStyle.normal),
@@ -21,23 +25,23 @@ class WediveTextFieldTheme {
       color: WediveColorsTheme.textBlack.withValues(alpha: 0.8),
     ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide.none,
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide.none,
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide.none,
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide(color: WediveColorsTheme.errorRed, width: 1.0),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide(color: Colors.orange, width: 2.0),
     ),
   );
@@ -46,14 +50,14 @@ class WediveTextFieldTheme {
     filled: true,
     fillColor: Colors.grey.shade800,
     errorMaxLines: 3,
-    prefixIconColor: Colors.grey,
-    suffixIconColor: Colors.grey,
+    prefixIconColor: WediveColorsTheme.borderGrey,
+    suffixIconColor: WediveColorsTheme.borderGrey,
     labelStyle: TextStyle().copyWith(
-      fontSize: 14,
+      fontSize: WediveSizes.fontSizeSm,
       color: WediveColorsTheme.textWhite,
     ),
     hintStyle: TextStyle().copyWith(
-      fontSize: 14,
+      fontSize: WediveSizes.fontSizeSm,
       color: WediveColorsTheme.textWhite,
     ),
     errorStyle: TextStyle().copyWith(fontStyle: FontStyle.normal),
@@ -62,23 +66,23 @@ class WediveTextFieldTheme {
       color: WediveColorsTheme.textWhite.withValues(alpha: 0.8),
     ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide.none,
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide.none,
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide.none,
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide(color: WediveColorsTheme.errorRed, width: 1.0),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(WediveSizes.inputFieldRadius),
       borderSide: BorderSide(color: Colors.orange, width: 2.0),
     ),
   );

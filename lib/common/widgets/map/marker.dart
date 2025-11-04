@@ -12,8 +12,8 @@ class MarkerSvg extends StatefulWidget {
   const MarkerSvg({
     super.key,
     this.color = WediveColorsTheme.backgroundWhite,
-    this.width = 40,
-    this.height = 47,
+    this.width = 50,
+    this.height = 50,
     this.duration = const Duration(milliseconds: 800),
     this.curve = Curves.easeInOut,
   });
@@ -79,7 +79,7 @@ class _MarkerSvgState extends State<MarkerSvg>
         final svgColor = _colorToHex(color!);
         final svg =
             '''
-<svg width="${widget.width}" height="${widget.height}" viewBox="0 0 40 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="40" height="47" viewBox="0 0 40 47" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="20" cy="45" r="1.5" fill="$svgColor" stroke="$svgColor"/>
   <path d="M19.2834 40.2491L20.717 40.2509L19.9991 41.1807L19.2834 40.2491Z" fill="$svgColor" stroke="$svgColor"/>
   <circle cx="20" cy="20" r="18.5" fill="$svgColor" stroke="$svgColor" stroke-width="3"/>

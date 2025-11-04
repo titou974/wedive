@@ -84,7 +84,7 @@ class WediveTextsFr {
   static const String fishing = 'Pêche';
   static const String fishingDescription = 'Pêche en gros ou en petit';
 
-  static const String next = 'CONTINUER';
+  static const String next = 'Continuer';
 
   // Localisation
   static const String locationPermissionTitle = 'Autorisation de localisation';
@@ -95,6 +95,8 @@ class WediveTextsFr {
 
   static const String confirmEmail = "Vérifie ton e-mail";
 
+  static const String emailPlaceholder = "support@wedive.app";
+
   static const String confirmEmailSubtitle =
       "Félicitations ! Vous être désormais un WeDiver. Confirmez votre e-mail pour pouvoir profiter de toute l'expérience";
 
@@ -103,13 +105,7 @@ class WediveTextsFr {
   static const String yourAccountCreatedSubtitle =
       'Vous pouvez maintenant commencer à explorer les spots de plongée et partager vos aventures marines.';
 
-  static const String spot1 = 'Boucan Canot';
-
-  static const String spot2 = 'Cap La Houssaye';
-
-  static const String spot3 = 'Trou d\'Eau';
-
-  static const String cityTest = 'Saint-Gilles les Bains, France';
+  // Localisation Permission
 
   static const String locationPermissionDeniedTitle =
       'Autorisation de localisation refusée';
@@ -119,4 +115,16 @@ class WediveTextsFr {
 
   static const String locationPermissionSubtitleDenied =
       'L\'autorisation de localisation a été refusée. Veuillez autoriser la localisation pour continuer.';
+
+  // Map
+  static const String diversCount = '+{count} plongeurs';
+
+  // Map Spots - for testing purposes
+  static const String spot1 = 'Boucan Canot';
+
+  static const String spot2 = 'Cap La Houssaye';
+
+  static const String spot3 = 'Trou d\'Eau';
+
+  static const String cityTest = 'Saint-Gilles les Bains, France';
 }

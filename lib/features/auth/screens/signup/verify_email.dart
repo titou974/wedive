@@ -40,7 +40,7 @@ class VerifyEmailScreen extends StatelessWidget {
               ),
               const SizedBox(height: WediveSizes.spaceBtwItems),
               Text(
-                'support@wedive.app',
+                WediveTextsFr.emailPlaceholder,
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),

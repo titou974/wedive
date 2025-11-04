@@ -1,3 +1,4 @@
+import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 
@@ -8,11 +9,14 @@ class WediveElevatedButtonTheme {
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: WediveColorsTheme.primaryBlue,
-          foregroundColor: Colors.white,
-          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          foregroundColor: WediveColorsTheme.backgroundWhite,
+          textStyle: TextStyle(
+            fontSize: WediveSizes.fontSizeMd,
+            fontWeight: FontWeight.bold,
+          ),
           minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(WediveSizes.buttonRadius),
           ),
         ),
       );
@@ -21,11 +25,14 @@ class WediveElevatedButtonTheme {
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: WediveColorsTheme.primaryPink, // Main primary
-          foregroundColor: Colors.white,
-          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          foregroundColor: WediveColorsTheme.backgroundWhite,
+          textStyle: TextStyle(
+            fontSize: WediveSizes.fontSizeMd,
+            fontWeight: FontWeight.bold,
+          ),
           minimumSize: const Size(150, 50),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(WediveSizes.buttonRadius),
           ),
         ),
       );

@@ -1,5 +1,4 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
-import 'package:Wedive/features/map/controllers/map_controller.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
