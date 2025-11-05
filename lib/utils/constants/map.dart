@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 
 class FlutterMapConstants {
+  // Map constants
   static const double defaultZoomLevel = 11.0;
   static const double minZoomLevel = 2.0;
   static const double maxZoomLevel = 18.0;
@@ -25,6 +26,11 @@ class FlutterMapConstants {
   static const double defaultMarkerSize = 60.0;
   static const double topMarkerOffset = 0.06;
   static const double avatarRadiusFactor = 0.74;
+
+  // Cluster Marker constants
+  static const defaultClusterMarkerSize = 50.0;
+  static const maxClusterRadius = 50;
+  static const showPolygon = false;
 
   // userMarker constants
   static const int duration = 5000;

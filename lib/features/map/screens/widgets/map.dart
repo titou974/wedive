@@ -1,13 +1,18 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
+import 'package:Wedive/common/widgets/map/cluster_marker.dart';
 import 'package:Wedive/features/map/controllers/animation_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/animatedusermarker.dart';
 import 'package:Wedive/utils/constants/map.dart';
+import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart' as fm;
 import 'package:flutter_map_animations/flutter_map_animations.dart'
     as fm_animation;
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart'
+    as fm_cluster;
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart'
@@ -85,11 +90,22 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
                 ),
           additionalOptions: {'accessToken': accessToken},
         ),
-        // reactive marker layer — rebuild when markerList changes
-        Obx(() {
-          final markers = widget.markerList.toList();
-          return fm.MarkerLayer(markers: markers);
-        }),
+        fm_cluster.MarkerClusterLayerWidget(
+          options: fm_cluster.MarkerClusterLayerOptions(
+            maxClusterRadius: FlutterMapConstants.maxClusterRadius,
+            showPolygon: FlutterMapConstants.showPolygon,
+            size: const Size(
+              FlutterMapConstants.defaultClusterMarkerSize,
+              FlutterMapConstants.defaultClusterMarkerSize,
+            ),
+            markers: widget.markerList,
+            padding: const EdgeInsets.all(WediveSizes.spaceBtwItems),
+            builder: (context, clusterMarkers) {
+              return ClusterMarker(length: clusterMarkers.length);
+            },
+          ),
+        ),
+
         Obx(() {
           final pos = widget.localisationController.currentPosition.value;
           if (pos == null) return const SizedBox.shrink();

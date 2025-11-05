@@ -69,7 +69,10 @@ class _MapScreenState extends State<MapScreen> {
             );
           }),
           InfinityCarousel(spots: spots),
-          RecenterButton(localisationController: localisationController),
+          RecenterButton(
+            localisationController: localisationController,
+            mapController: mapController,
+          ),
         ],
       ),
     );

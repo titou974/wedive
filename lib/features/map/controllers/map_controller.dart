@@ -77,7 +77,6 @@ class MapController extends GetxController {
     }
   }
 
-  /// Move the map to a DiveSpot
   void moveToSpot(
     DiveSpot spot, {
     double zoom = FlutterMapConstants.defaultZoomLevel,
