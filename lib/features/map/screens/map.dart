@@ -37,8 +37,6 @@ class _MapScreenState extends State<MapScreen> {
       );
       if (granted) {
         await localisationController.startPositionStream();
-      } else {
-        // permission/service not available — UI will show messages on the localisation page
       }
     });
   }

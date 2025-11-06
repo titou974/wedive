@@ -31,7 +31,7 @@ class MapController extends GetxController {
     super.onInit();
     // react to localisation updates
     _posSub = localisationController.currentPosition.listen((pos) {
-      if (pos == null) return;
+      if (pos == null || markerController.selectedSpot.value != null) return;
       if (animatedMapController != null) {
         moveToPosition(pos);
       }
