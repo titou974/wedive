@@ -26,12 +26,18 @@ class MapController extends GetxController {
 
   StreamSubscription<Position?>? _posSub;
 
+  Rxn<LatLng> defaultCenter = Rxn<LatLng>();
+
   @override
   void onInit() {
     super.onInit();
     // react to localisation updates
     _posSub = localisationController.currentPosition.listen((pos) {
       if (pos == null) return;
+      if (markerController.selectedSpot.value != null) {
+        moveToSpot(markerController.selectedSpot.value!);
+        return;
+      }
       if (animatedMapController != null) {
         moveToPosition(pos);
       }
@@ -99,6 +105,7 @@ class MapController extends GetxController {
       debugPrint('recenterToUser: no current position available');
       return;
     }
+    markerController.resetSpotSelection();
     moveToPosition(pos, zoom: zoom);
   }
 

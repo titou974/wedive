@@ -39,6 +39,10 @@ class MarkerController extends GetxController {
     markerList.assignAll(MarkerList().buildMarkers());
   }
 
+  void resetSpotSelection() {
+    selectedSpot.value = null;
+  }
+
   int? getSelectedIndex() {
     if (selectedSpot.value == null) return null;
     return spots.indexWhere((spot) => spot.id == selectedSpot.value!.id);

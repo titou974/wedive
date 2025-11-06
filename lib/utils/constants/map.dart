@@ -1,10 +1,3 @@
-// CameraOptions camera = CameraOptions(
-//   center: Point(coordinates: Position(55.536384, -21.115141)),
-//   zoom: 9.5,
-//   bearing: 0,
-//   pitch: 0,
-// );
-
 import 'package:flutter/material.dart';
 
 class FlutterMapConstants {

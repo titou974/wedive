@@ -12,7 +12,6 @@ import 'package:flutter_map_animations/flutter_map_animations.dart'
     as fm_animation;
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart'
     as fm_cluster;
-import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:Wedive/features/map/controllers/map_controller.dart'
