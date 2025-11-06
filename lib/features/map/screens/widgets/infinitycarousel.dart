@@ -53,212 +53,203 @@ class _InfinityCarouselState extends State<InfinityCarousel> {
               final isSelected =
                   markerController.selectedSpot.value?.id == spot.id;
 
-              return GestureDetector(
-                onTap: () => markerController.selectSpot(spot),
-                child: AnimatedContainer(
-                  duration: const Duration(
-                    milliseconds:
-                        FlutterMapConstants.carouselBorderColorDuration,
-                  ),
-                  // keep outer radius for shadow/animation
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      WediveSizes.cardRadiusLg,
+              return AnimatedContainer(
+                duration: const Duration(
+                  milliseconds: FlutterMapConstants.carouselBorderColorDuration,
+                ),
+                // keep outer radius for shadow/animation
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(WediveSizes.cardRadiusLg),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.shadow.withValues(alpha: 0.1),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.shadow.withValues(alpha: 0.1),
-                        blurRadius: 6,
-                        offset: const Offset(0, 2),
+                  ],
+                ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    // image clipped to same radius so it won't overflow corners
+                    AnimatedScale(
+                      scale: isSelected
+                          ? FlutterMapConstants.animatedImageScale
+                          : 1.0,
+                      duration: const Duration(
+                        milliseconds: FlutterMapConstants.carouselZoomDuration,
                       ),
-                    ],
-                  ),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      // image clipped to same radius so it won't overflow corners
-                      AnimatedScale(
-                        scale: isSelected
-                            ? FlutterMapConstants.animatedImageScale
-                            : 1.0,
-                        duration: const Duration(
-                          milliseconds:
-                              FlutterMapConstants.carouselZoomDuration,
+                      curve: Curves.easeInOut,
+                      alignment: Alignment.center,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          WediveSizes.cardRadiusLg,
                         ),
-                        curve: Curves.easeInOut,
-                        alignment: Alignment.center,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            WediveSizes.cardRadiusLg,
-                          ),
-                          child: Image.asset(
-                            spot.imageUrl,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(
-                                  'assets/images/spots/fallback.webp',
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                ),
-                          ),
+                        child: Image.asset(
+                          spot.imageUrl,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Image.asset(
+                                'assets/images/spots/fallback.webp',
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
                         ),
                       ),
+                    ),
 
-                      // dark overlay so text stays readable
-                      Positioned.fill(
-                        child: IgnorePointer(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.shadow.withValues(alpha: 0.20),
-                              borderRadius: BorderRadius.circular(
-                                WediveSizes.cardRadiusLg,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      // draw the border as an overlay so it is always visible on top of the image
-                      // always present but animated depending on isSelected
-                      Positioned.fill(
-                        child: IgnorePointer(
-                          child: AnimatedContainer(
-                            duration: const Duration(
-                              milliseconds: FlutterMapConstants
-                                  .carouselBorderColorDuration,
-                            ),
-                            curve: Curves.easeInOut,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                WediveSizes.cardRadiusLg,
-                              ),
-                              border: Border.all(
-                                color: isSelected
-                                    ? Theme.of(context).colorScheme.secondary
-                                    : WediveColorsTheme.transparent,
-                                width: 3,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 12,
-                        right: 12,
-                        top: 24,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              spot.title,
-                              style: Theme.of(context).textTheme.bodySmall
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSurface,
-                                    fontWeight: FontWeight.bold,
-                                    shadows: [
-                                      Shadow(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .shadow
-                                            .withValues(alpha: 0.7),
-                                        blurRadius: 6,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                            ),
-                            const SizedBox(height: WediveSizes.sm),
-                            Text(
-                              WediveTextsFr.diversCount.replaceFirst(
-                                '{count}',
-                                spot.divers.toString(),
-                              ),
-                              style: Theme.of(context).textTheme.labelSmall
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSurface,
-                                    shadows: [
-                                      Shadow(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .shadow
-                                            .withValues(alpha: 0.7),
-                                        blurRadius: 6,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                            ),
-                            const SizedBox(height: WediveSizes.xs),
-                            Row(
-                              children: spot.diversAvatars
-                                  .take(3)
-                                  .toList()
-                                  .asMap()
-                                  .entries
-                                  .map((entry) {
-                                    final index = entry.key;
-                                    final avatarUrl = entry.value;
-                                    return Transform.translate(
-                                      offset: Offset(-index * 4.0, 0),
-                                      child: CircleAvatar(
-                                        radius: 6,
-                                        backgroundImage: AssetImage(avatarUrl),
-                                        backgroundColor: Theme.of(
-                                          context,
-                                        ).colorScheme.surfaceContainer,
-                                      ),
-                                    );
-                                  })
-                                  .toList(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 12,
-                        right: 12,
+                    // dark overlay so text stays readable
+                    Positioned.fill(
+                      child: IgnorePointer(
                         child: Container(
-                          width: 36,
-                          height: 36,
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.tertiary,
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.shadow.withValues(alpha: 0.15),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.shadow.withValues(alpha: 0.20),
+                            borderRadius: BorderRadius.circular(
+                              WediveSizes.cardRadiusLg,
+                            ),
                           ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            spot.grade.toStringAsFixed(1),
+                        ),
+                      ),
+                    ),
+
+                    // draw the border as an overlay so it is always visible on top of the image
+                    // always present but animated depending on isSelected
+                    Positioned.fill(
+                      child: IgnorePointer(
+                        child: AnimatedContainer(
+                          duration: const Duration(
+                            milliseconds:
+                                FlutterMapConstants.carouselBorderColorDuration,
+                          ),
+                          curve: Curves.easeInOut,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              WediveSizes.cardRadiusLg,
+                            ),
+                            border: Border.all(
+                              color: isSelected
+                                  ? Theme.of(context).colorScheme.secondary
+                                  : WediveColorsTheme.transparent,
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 12,
+                      right: 12,
+                      top: 24,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            spot.title,
                             style: Theme.of(context).textTheme.bodySmall
                                 ?.copyWith(
                                   color: Theme.of(
                                     context,
                                   ).colorScheme.onSurface,
                                   fontWeight: FontWeight.bold,
+                                  shadows: [
+                                    Shadow(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .shadow
+                                          .withValues(alpha: 0.7),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
                                 ),
                           ),
+                          const SizedBox(height: WediveSizes.sm),
+                          Text(
+                            WediveTextsFr.diversCount.replaceFirst(
+                              '{count}',
+                              spot.divers.toString(),
+                            ),
+                            style: Theme.of(context).textTheme.labelSmall
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                  shadows: [
+                                    Shadow(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .shadow
+                                          .withValues(alpha: 0.7),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                          ),
+                          const SizedBox(height: WediveSizes.xs),
+                          Row(
+                            children: spot.diversAvatars
+                                .take(3)
+                                .toList()
+                                .asMap()
+                                .entries
+                                .map((entry) {
+                                  final index = entry.key;
+                                  final avatarUrl = entry.value;
+                                  return Transform.translate(
+                                    offset: Offset(-index * 4.0, 0),
+                                    child: CircleAvatar(
+                                      radius: 6,
+                                      backgroundImage: AssetImage(avatarUrl),
+                                      backgroundColor: Theme.of(
+                                        context,
+                                      ).colorScheme.surfaceContainer,
+                                    ),
+                                  );
+                                })
+                                .toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 12,
+                      right: 12,
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.tertiary,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.shadow.withValues(alpha: 0.15),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          spot.grade.toStringAsFixed(1),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             });

@@ -58,7 +58,7 @@ class _MapScreenState extends State<MapScreen> {
             mapController: mapController,
             localisationController: localisationController,
             animationController: animationController,
-            markerList: markerController.markerList,
+            markerController: markerController,
           ),
           Obx(() {
             final city = localisationController.cityName;

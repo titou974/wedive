@@ -26,18 +26,12 @@ class MapController extends GetxController {
 
   StreamSubscription<Position?>? _posSub;
 
-  Rxn<LatLng> defaultCenter = Rxn<LatLng>();
-
   @override
   void onInit() {
     super.onInit();
     // react to localisation updates
     _posSub = localisationController.currentPosition.listen((pos) {
       if (pos == null) return;
-      if (markerController.selectedSpot.value != null) {
-        moveToSpot(markerController.selectedSpot.value!);
-        return;
-      }
       if (animatedMapController != null) {
         moveToPosition(pos);
       }
@@ -56,11 +50,20 @@ class MapController extends GetxController {
     animatedMapController = controller;
     mapReady.value = true;
 
-    // If we already have a last-known position and follow is enabled, recenter
-    final pos = localisationController.currentPosition.value;
-    if (pos != null) {
-      moveToPosition(pos);
-    }
+    // If a spot is already selected when the map becomes ready, center to it.
+    // Otherwise, fall back to last known user position.
+    Future.microtask(() {
+      final selected = markerController.selectedSpot.value;
+      if (selected != null) {
+        // prefer centering on the selected spot
+        moveToSpot(selected);
+        return;
+      }
+      final pos = localisationController.currentPosition.value;
+      if (pos != null) {
+        moveToPosition(pos);
+      }
+    });
   }
 
   /// Move the map to a geolocated [Position]

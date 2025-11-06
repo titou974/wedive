@@ -1,6 +1,7 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/common/widgets/map/cluster_marker.dart';
 import 'package:Wedive/features/map/controllers/animation_controller.dart';
+import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/animatedusermarker.dart';
 import 'package:Wedive/utils/constants/map.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
@@ -23,12 +24,12 @@ class Map extends StatefulWidget {
     required this.mapController,
     required this.localisationController,
     required this.animationController,
-    required this.markerList,
+    required this.markerController,
   });
   final map_controller.MapController mapController;
   final LocalisationController localisationController;
   final UserMarkerAnimationController animationController;
-  final RxList<fm.Marker> markerList;
+  final MarkerController markerController;
 
   @override
   State<Map> createState() => _MapState();
@@ -69,8 +70,12 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
           widget.mapController.bindFlutterMapController(flutterMapController);
         },
         initialCenter: LatLng(
-          pos?.latitude ?? FlutterMapConstants.defaultLatitude,
-          pos?.longitude ?? FlutterMapConstants.defaultLongitude,
+          widget.markerController?.selectedSpot.value?.location.latitude ??
+              pos?.latitude ??
+              FlutterMapConstants.defaultLatitude,
+          widget.markerController?.selectedSpot.value?.location.longitude ??
+              pos?.longitude ??
+              FlutterMapConstants.defaultLongitude,
         ),
         minZoom: FlutterMapConstants.minZoomLevel,
         maxZoom: FlutterMapConstants.maxZoomLevel,
@@ -97,7 +102,7 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
               FlutterMapConstants.defaultClusterMarkerSize,
               FlutterMapConstants.defaultClusterMarkerSize,
             ),
-            markers: widget.markerList,
+            markers: widget.markerController.markerList,
             padding: const EdgeInsets.all(WediveSizes.spaceBtwItems),
             builder: (context, clusterMarkers) {
               return ClusterMarker(length: clusterMarkers.length);
