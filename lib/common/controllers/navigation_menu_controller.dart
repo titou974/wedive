@@ -6,8 +6,24 @@ class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
   final screens = [
-    MapScreen(),
+    const MapScreen(),
     Container(color: Colors.green),
     Container(color: Colors.blue),
   ];
+
+  void changeTabIndex(int index) {
+    selectedIndex.value = index;
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Any initialization logic
+  }
+
+  @override
+  void onClose() {
+    // Clean up if needed
+    super.onClose();
+  }
 }

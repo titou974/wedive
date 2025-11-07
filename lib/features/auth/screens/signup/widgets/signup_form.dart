@@ -1,4 +1,5 @@
 import 'package:Wedive/features/auth/screens/signup/signupsteps.dart';
+import 'package:Wedive/routes/app_routes.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,7 @@ class SignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => Get.to(const SignupSteps()),
+              onPressed: () => Get.offAllNamed(AppRoutes.signupSteps),
               child: Text(WediveTextsFr.createAccount),
             ),
           ),

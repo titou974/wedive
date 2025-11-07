@@ -9,7 +9,7 @@ class NavigationMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NavigationController());
+    final controller = Get.find<NavigationController>();
 
     return Scaffold(
       bottomNavigationBar: Obx(

@@ -1,4 +1,6 @@
+import 'package:Wedive/common/bindings/navigation_binding.dart';
 import 'package:Wedive/navigation_menu.dart';
+import 'package:Wedive/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +15,6 @@ class SignUpController extends GetxController {
   void updatePageIndicator(int index) => {currentPageIndex.value = index};
 
   void updateSelectedSports(List<String> sports) {
-    print('Selected sports: $sports');
     selectedSports.value = sports;
   }
 
@@ -28,9 +29,8 @@ class SignUpController extends GetxController {
 
   void nextPage() {
     if (currentPageIndex.value == 1) {
-      // Assuming 2 is the last page index
-      // Get.to(LoginScreen()); // Navigate to the login screen
-      Get.offAll(NavigationMenu());
+      NavigationBinding().dependencies();
+      Get.offAllNamed(AppRoutes.home);
     } else {
       int page = currentPageIndex.value + 1;
       pageController.animateToPage(

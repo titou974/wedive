@@ -1,4 +1,4 @@
-import 'package:Wedive/features/auth/controllers/sign_up_controller.dart';
+import 'package:Wedive/features/auth/controllers/signup_controller.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:Wedive/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';

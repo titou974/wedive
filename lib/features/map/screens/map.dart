@@ -5,32 +5,21 @@ import 'package:Wedive/utils/constants/image_strings.dart';
 import 'package:Wedive/utils/constants/lists.dart';
 import 'package:Wedive/features/map/screens/widgets/map.dart';
 import 'package:Wedive/common/controllers/localisation_controller.dart';
-import 'package:Wedive/features/map/controllers/map_controller.dart'
-    as app_map_ctrl;
-import 'package:Wedive/features/map/controllers/animation_controller.dart';
-import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/infinitycarousel.dart';
 import 'package:Wedive/features/map/screens/widgets/recenterbutton.dart';
 import 'package:Wedive/common/widgets/appbar/topbar.dart';
 
 class MapScreen extends StatelessWidget {
-  MapScreen({super.key});
-  final markerController = Get.put(MarkerController());
-  final localisationController = Get.put(LocalisationController());
-  final mapController = Get.put(app_map_ctrl.MapController());
-  final animationController = Get.put(UserMarkerAnimationController());
+  const MapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localisationController = Get.find<LocalisationController>();
+
     return Scaffold(
       body: Stack(
         children: [
-          Map(
-            mapController: mapController,
-            localisationController: localisationController,
-            animationController: animationController,
-            markerController: markerController,
-          ),
+          Map(),
           Obx(() {
             final city = localisationController.cityName;
             final country = localisationController.countryName;
@@ -40,7 +29,7 @@ class MapScreen extends StatelessWidget {
             );
           }),
           InfinityCarousel(spots: wediveSpotsExemples),
-          RecenterButton(mapController: mapController),
+          RecenterButton(),
         ],
       ),
     );

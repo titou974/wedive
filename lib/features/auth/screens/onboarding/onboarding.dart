@@ -14,7 +14,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnBoardingController());
+    final controller = Get.find<OnBoardingController>();
 
     return Scaffold(
       body: Stack(

@@ -1,4 +1,4 @@
-import 'package:Wedive/features/auth/screens/login/login.dart';
+import 'package:Wedive/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,9 +21,7 @@ class OnBoardingController extends GetxController {
 
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      // Assuming 2 is the last page index
-      // Get.to(LoginScreen()); // Navigate to the login screen
-      Get.offAll(LoginScreen());
+      Get.offAllNamed(AppRoutes.signup);
     } else {
       int page = currentPageIndex.value + 1;
       pageController.animateToPage(

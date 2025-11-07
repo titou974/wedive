@@ -18,15 +18,15 @@ class AnimatedUserMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final animController = Get.find<UserMarkerAnimationController>();
+    final animationController = Get.find<UserMarkerAnimationController>();
 
     return Stack(
       children: [
         AnimatedBuilder(
-          animation: animController.pulseController,
+          animation: animationController.pulseController,
           builder: (context, child) {
-            final pulseValue = animController.pulseAnimation.value;
-            final opacityValue = animController.opacityAnimation.value;
+            final pulseValue = animationController.pulseAnimation.value;
+            final opacityValue = animationController.opacityAnimation.value;
 
             return fm.CircleLayer(
               circles: [
@@ -45,10 +45,10 @@ class AnimatedUserMarker extends StatelessWidget {
         ),
 
         AnimatedBuilder(
-          animation: animController.pulseController,
+          animation: animationController.pulseController,
           builder: (context, child) {
-            final pulseValue = animController.pulseAnimation.value;
-            final opacityValue = animController.opacityAnimation.value;
+            final pulseValue = animationController.pulseAnimation.value;
+            final opacityValue = animationController.opacityAnimation.value;
 
             final delayedPulse = (pulseValue + 0.3).clamp(0.0, 1.0);
             final delayedOpacity = (opacityValue - 0.2).clamp(0.0, 1.0);

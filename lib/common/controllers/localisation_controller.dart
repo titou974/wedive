@@ -1,6 +1,5 @@
 import 'dart:async';
-
-import 'package:Wedive/navigation_menu.dart';
+import 'package:Wedive/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -72,7 +71,7 @@ class LocalisationController extends GetxController {
         await _updatePlacemark(pos);
 
         if (navigateOnSuccess) {
-          Get.offAll(NavigationMenu());
+          Get.offAllNamed(AppRoutes.home);
           isRequestingLocation.value = false;
           return true;
         }

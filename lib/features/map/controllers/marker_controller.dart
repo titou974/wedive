@@ -44,15 +44,6 @@ class MarkerController extends GetxController {
         size: FlutterMapConstants.defaultMarkerSize,
       ),
     );
-
-    // move map to selected spot if MapController is available
-    if (Get.isRegistered<app_map_ctrl.MapController>()) {
-      try {
-        Get.find<app_map_ctrl.MapController>().moveToSpot(spot);
-      } catch (e) {
-        debugPrint('Error moving to spot from MarkerController: $e');
-      }
-    }
   }
 
   void resetSpotSelection() {

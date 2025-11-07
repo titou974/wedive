@@ -1,5 +1,5 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
-import 'package:Wedive/features/auth/controllers/sign_up_controller.dart';
+import 'package:Wedive/features/auth/controllers/signup_controller.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/divingsport.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/localisation.dart';
 import 'package:Wedive/features/auth/screens/signup/widgets/signupsteps_dots.dart';
@@ -13,7 +13,7 @@ class SignupSteps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final signupController = Get.put(SignUpController());
+    final signupController = Get.find<SignUpController>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -59,9 +59,8 @@ class SignupSteps extends StatelessWidget {
               children: [
                 Expanded(
                   child: Obx(() {
-                    final localisationController = Get.put(
-                      LocalisationController(),
-                    );
+                    final localisationController =
+                        Get.find<LocalisationController>();
 
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       if (!localisationController.isRequestingLocation.value) {

@@ -1,6 +1,7 @@
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/common/widgets/map/cluster_marker.dart';
 import 'package:Wedive/features/map/controllers/animation_controller.dart';
+import 'package:Wedive/features/map/controllers/map_controller.dart';
 import 'package:Wedive/features/map/controllers/marker_controller.dart';
 import 'package:Wedive/features/map/screens/widgets/animatedusermarker.dart';
 import 'package:Wedive/utils/constants/map.dart';
@@ -19,17 +20,7 @@ import 'package:Wedive/features/map/controllers/map_controller.dart'
     as map_controller;
 
 class Map extends StatefulWidget {
-  const Map({
-    super.key,
-    required this.mapController,
-    required this.localisationController,
-    required this.animationController,
-    required this.markerController,
-  });
-  final map_controller.MapController mapController;
-  final LocalisationController localisationController;
-  final UserMarkerAnimationController animationController;
-  final MarkerController markerController;
+  const Map({super.key});
 
   @override
   State<Map> createState() => _MapState();
@@ -49,18 +40,22 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final mapController = Get.find<MapController>();
+    final markerController = Get.find<MarkerController>();
+    final localisationController = Get.find<LocalisationController>();
+
     final dark = WeDiveHelperFunctions.isDarkMode(context);
-    final pos = widget.localisationController.currentPosition.value;
+    final pos = localisationController.currentPosition.value;
     return fm.FlutterMap(
       options: fm.MapOptions(
         onMapReady: () {
-          widget.mapController.bindFlutterMapController(flutterMapController);
+          mapController.bindFlutterMapController(flutterMapController);
         },
         initialCenter: LatLng(
-          widget.markerController?.selectedSpot.value?.location.latitude ??
+          markerController?.selectedSpot.value?.location.latitude ??
               pos?.latitude ??
               FlutterMapConstants.defaultLatitude,
-          widget.markerController?.selectedSpot.value?.location.longitude ??
+          markerController?.selectedSpot.value?.location.longitude ??
               pos?.longitude ??
               FlutterMapConstants.defaultLongitude,
         ),
@@ -89,7 +84,7 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
               FlutterMapConstants.defaultClusterMarkerSize,
               FlutterMapConstants.defaultClusterMarkerSize,
             ),
-            markers: widget.markerController.markerList,
+            markers: markerController.markerList,
             padding: const EdgeInsets.all(WediveSizes.spaceBtwItems),
             builder: (context, clusterMarkers) {
               return ClusterMarker(length: clusterMarkers.length);
@@ -98,7 +93,7 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
         ),
 
         Obx(() {
-          final pos = widget.localisationController.currentPosition.value;
+          final pos = localisationController.currentPosition.value;
           if (pos == null) return const SizedBox.shrink();
 
           return AnimatedUserMarker(
