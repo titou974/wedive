@@ -12,7 +12,6 @@ class LocalisationController extends GetxController {
 
   String? location;
 
-  // ✅ Déclarer comme RxnString (nullable reactive string)
   final RxnString cityName = RxnString();
   final RxnString countryName = RxnString();
 
@@ -22,15 +21,13 @@ class LocalisationController extends GetxController {
   );
 
   RxBool isRequestingLocation = false.obs;
-  Rx<LocationPermission?> locationPermission = Rxn<LocationPermission>();
   RxBool locationServiceEnabled = false.obs;
 
-  // expose current position as reactive value
+  Rx<LocationPermission?> locationPermission = Rxn<LocationPermission>();
   Rxn<Position> currentPosition = Rxn<Position>();
 
   StreamSubscription? userPositionStream;
 
-  // ✅ Pour throttling du geocoding
   DateTime? _lastGeocodingCall;
   static const _geocodingThrottle = Duration(seconds: 30);
 
@@ -38,9 +35,6 @@ class LocalisationController extends GetxController {
     location = value;
   }
 
-  /// Request permission, obtain current position.
-  /// If [navigateOnSuccess] is true, navigate to NavigationMenu when a position is obtained.
-  /// Returns true if permission granted and position obtained.
   Future<bool> requestLocationAndProceed({
     BuildContext? context,
     bool navigateOnSuccess = false,
@@ -68,15 +62,13 @@ class LocalisationController extends GetxController {
     if (locationPermission.value == LocationPermission.always ||
         locationPermission.value == LocationPermission.whileInUse) {
       try {
-        // set immediate current position
         final pos = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.best,
+          locationSettings: locationSettings,
         );
         currentPosition.value = pos;
         location = '${pos.latitude},${pos.longitude}';
         debugPrint('Obtained position: ${pos.latitude}, ${pos.longitude}');
 
-        // ✅ Mettre à jour le placemark
         await _updatePlacemark(pos);
 
         if (navigateOnSuccess) {
@@ -95,13 +87,11 @@ class LocalisationController extends GetxController {
     return false;
   }
 
-  // ✅ Méthode corrigée pour mettre à jour le placemark
   Future<void> _updatePlacemark(Position pos) async {
-    // ✅ Throttle pour éviter trop d'appels
     final now = DateTime.now();
     if (_lastGeocodingCall != null &&
         now.difference(_lastGeocodingCall!) < _geocodingThrottle) {
-      return; // Ignorer cet appel
+      return;
     }
 
     _lastGeocodingCall = now;
@@ -135,7 +125,6 @@ class LocalisationController extends GetxController {
           ).listen((Position? pos) async {
             if (pos != null) {
               currentPosition.value = pos;
-              // Mettre à jour le placemark (throttled)
               await _updatePlacemark(pos);
             }
           });

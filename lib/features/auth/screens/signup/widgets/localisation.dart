@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class LocalisationPage extends StatelessWidget {
-  final String? location;
-
-  const LocalisationPage({super.key, required this.location});
+  const LocalisationPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class SpotMarker extends StatelessWidget {
+  final String spotId;
   final String imagePath;
   final double size;
   final VoidCallback? onTap;
@@ -12,6 +13,7 @@ class SpotMarker extends StatelessWidget {
 
   const SpotMarker({
     super.key,
+    required this.spotId,
     required this.imagePath,
     this.size = FlutterMapConstants.defaultMarkerSize,
     this.onTap,
@@ -53,6 +55,7 @@ class SpotMarker extends StatelessWidget {
 
   static Marker toMarker({
     required LatLng point,
+    required String spotId,
     required String imagePath,
     double size = FlutterMapConstants.defaultMarkerSize,
     VoidCallback? onTap,
@@ -63,6 +66,7 @@ class SpotMarker extends StatelessWidget {
       width: size,
       height: size,
       child: SpotMarker(
+        spotId: spotId,
         imagePath: imagePath,
         size: size,
         onTap: onTap,

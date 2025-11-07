@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:Wedive/common/controllers/localisation_controller.dart';
 import 'package:Wedive/features/map/controllers/marker_controller.dart';
-import 'package:Wedive/utils/constants/class.dart'; // DiveSpot
+import 'package:Wedive/utils/constants/class.dart';
 import 'package:Wedive/utils/constants/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,45 +28,49 @@ class MapController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // react to localisation updates
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final granted = await localisationController.requestLocationAndProceed(
+        navigateOnSuccess: false,
+      );
+      if (granted) {
+        await localisationController.startPositionStream();
+      }
+    });
+
     _posSub = localisationController.currentPosition.listen((pos) {
       if (pos == null || markerController.selectedSpot.value != null) return;
       if (animatedMapController != null) {
-        moveToPosition(pos);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          moveToPosition(pos);
+        });
       }
     });
 
-    // react to selected spot changes (when a marker is selected elsewhere)
     markerController.selectedSpot.listen((spot) {
-      if (spot != null && animatedMapController != null) {
-        moveToSpot(spot);
+      if (spot == null) return;
+      if (animatedMapController != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          moveToSpot(spot);
+        });
       }
     });
   }
 
-  /// Bind the flutter_map controller instance once the map is created.
   void bindFlutterMapController(fm_animation.AnimatedMapController controller) {
     animatedMapController = controller;
     mapReady.value = true;
-
-    // If a spot is already selected when the map becomes ready, center to it.
-    // Otherwise, fall back to last known user position.
-    Future.microtask(() {
-      final selected = markerController.selectedSpot.value;
-      if (selected != null) {
-        // prefer centering on the selected spot
-        moveToSpot(selected);
-        return;
-      }
-      final pos = localisationController.currentPosition.value;
-      if (pos != null) {
-        moveToPosition(pos);
-      }
-    });
+    final selected = markerController.selectedSpot.value;
+    if (selected != null) {
+      moveToSpot(selected);
+      return;
+    }
+    final pos = localisationController.currentPosition.value;
+    if (pos != null) {
+      moveToPosition(pos);
+    }
   }
 
-  /// Move the map to a geolocated [Position]
-  /// Uses instant move; you can replace with animated logic if you add an animated controller.
   void moveToPosition(
     Position pos, {
     double zoom = FlutterMapConstants.defaultZoomLevel,
@@ -101,7 +104,6 @@ class MapController extends GetxController {
     }
   }
 
-  /// Recenters on current user position (if available)
   void recenterToUser({double zoom = FlutterMapConstants.defaultZoomLevel}) {
     final pos = localisationController.currentPosition.value;
     if (pos == null) {

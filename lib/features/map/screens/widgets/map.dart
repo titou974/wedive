@@ -37,6 +37,7 @@ class Map extends StatefulWidget {
 
 class _MapState extends State<Map> with TickerProviderStateMixin {
   String get accessToken => dotenv.env['MAPBOX_ACCESS_TOKEN'] ?? '';
+
   late final flutterMapController = fm_animation.AnimatedMapController(
     vsync: this,
     duration: const Duration(
@@ -45,20 +46,6 @@ class _MapState extends State<Map> with TickerProviderStateMixin {
     curve: FlutterMapConstants.mapTransitionCurve,
     cancelPreviousAnimations: FlutterMapConstants.cancelPreviousMapAnimations,
   );
-
-  @override
-  void initState() {
-    super.initState();
-    // Démarrer l'animation au chargement
-    widget.animationController.startAnimation();
-  }
-
-  @override
-  void dispose() {
-    // Optionnel : arrêter l'animation et nettoyer
-    // Get.delete<UserMarkerAnimationController>();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

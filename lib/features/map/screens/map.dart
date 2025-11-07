@@ -13,39 +13,12 @@ import 'package:Wedive/features/map/screens/widgets/infinitycarousel.dart';
 import 'package:Wedive/features/map/screens/widgets/recenterbutton.dart';
 import 'package:Wedive/common/widgets/appbar/topbar.dart';
 
-class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
-
-  @override
-  State<MapScreen> createState() => _MapScreenState();
-}
-
-class _MapScreenState extends State<MapScreen> {
+class MapScreen extends StatelessWidget {
+  MapScreen({super.key});
   final markerController = Get.put(MarkerController());
   final localisationController = Get.put(LocalisationController());
   final mapController = Get.put(app_map_ctrl.MapController());
   final animationController = Get.put(UserMarkerAnimationController());
-  @override
-  void initState() {
-    super.initState();
-    // Load spots into marker controller
-    markerController.loadSpots(spots);
-    // ensure we request permission and start the position stream for the map
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final granted = await localisationController.requestLocationAndProceed(
-        navigateOnSuccess: false,
-      );
-      if (granted) {
-        await localisationController.startPositionStream();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    localisationController.userPositionStream?.cancel();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +39,8 @@ class _MapScreenState extends State<MapScreen> {
               imageUserUrl: WediveImages.profilePictureUser,
             );
           }),
-          InfinityCarousel(spots: spots),
-          RecenterButton(
-            localisationController: localisationController,
-            mapController: mapController,
-          ),
+          InfinityCarousel(spots: wediveSpotsExemples),
+          RecenterButton(mapController: mapController),
         ],
       ),
     );

@@ -7,7 +7,7 @@ import 'package:latlong2/latlong.dart';
 
 final markerController = Get.find<MarkerController>();
 
-final List<DiveSpot> spots = [
+final List<DiveSpot> wediveSpotsExemples = [
   DiveSpot(
     id: 1.toString(),
     location: LatLng(37.429725, -122.1),

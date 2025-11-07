@@ -6,7 +6,6 @@ import 'package:Wedive/features/auth/screens/signup/widgets/signupsteps_dots.dar
 import 'package:Wedive/features/auth/screens/signup/widgets/signupstepspage.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class SignupSteps extends StatelessWidget {
@@ -14,7 +13,6 @@ class SignupSteps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localisationController = Get.put(LocalisationController());
     final signupController = Get.put(SignUpController());
     return Scaffold(
       appBar: AppBar(
@@ -54,29 +52,24 @@ class SignupSteps extends StatelessWidget {
             ),
           ),
           SignupStepsPage(
-            title:
-                localisationController.locationPermission.value ==
-                        LocationPermission.deniedForever ||
-                    localisationController.locationPermission.value ==
-                        LocationPermission.denied
-                ? WediveTextsFr.locationPermissionDeniedTitle
-                : WediveTextsFr.locationPermissionTitle,
-            subtitle:
-                localisationController.locationPermission.value ==
-                    LocationPermission.deniedForever
-                ? WediveTextsFr.locationPermissionSubtitleDeniedForever
-                : localisationController.locationPermission.value ==
-                      LocationPermission.denied
-                ? WediveTextsFr.locationPermissionSubtitleDenied
-                : WediveTextsFr.locationPermissionSubtitle,
-            stepContent: LocalisationPage(
-              location: localisationController.location,
-            ),
-            // footer: request location & proceed (controller handles navigation if configured)
+            title: WediveTextsFr.locationPermissionTitle,
+            subtitle: WediveTextsFr.locationPermissionSubtitle,
+            stepContent: LocalisationPage(),
             footerWidget: Row(
               children: [
                 Expanded(
                   child: Obx(() {
+                    final localisationController = Get.put(
+                      LocalisationController(),
+                    );
+
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (!localisationController.isRequestingLocation.value) {
+                        localisationController.requestLocationAndProceed(
+                          navigateOnSuccess: true,
+                        );
+                      }
+                    });
                     final loading =
                         localisationController.isRequestingLocation.value;
                     return ElevatedButton(

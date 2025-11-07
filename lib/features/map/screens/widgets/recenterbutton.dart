@@ -7,11 +7,9 @@ class RecenterButton extends StatelessWidget {
   const RecenterButton({
     super.key,
     // required this.mapboxController,
-    required this.localisationController,
     required this.mapController,
   });
   // final MapController mapboxController;
-  final LocalisationController localisationController;
   final MapController mapController;
 
   @override
