@@ -9,30 +9,23 @@ class LocalisationController extends GetxController {
   static LocalisationController get instance =>
       Get.find<LocalisationController>();
 
-  String? location;
+  RxnString cityName = RxnString();
+  RxnString countryName = RxnString();
+  Rxn<Position> currentPosition = Rxn<Position>();
 
-  final RxnString cityName = RxnString();
-  final RxnString countryName = RxnString();
+  RxBool isRequestingLocation = false.obs;
+  RxBool locationServiceEnabled = false.obs;
+  Rx<LocationPermission?> locationPermission = Rxn<LocationPermission>();
+
+  StreamSubscription? userPositionStream;
 
   LocationSettings locationSettings = LocationSettings(
     accuracy: LocationAccuracy.high,
     distanceFilter: 10,
   );
 
-  RxBool isRequestingLocation = false.obs;
-  RxBool locationServiceEnabled = false.obs;
-
-  Rx<LocationPermission?> locationPermission = Rxn<LocationPermission>();
-  Rxn<Position> currentPosition = Rxn<Position>();
-
-  StreamSubscription? userPositionStream;
-
   DateTime? _lastGeocodingCall;
   static const _geocodingThrottle = Duration(seconds: 30);
-
-  void updateLocation(String value) {
-    location = value;
-  }
 
   Future<bool> requestLocationAndProceed({
     BuildContext? context,
@@ -65,9 +58,6 @@ class LocalisationController extends GetxController {
           locationSettings: locationSettings,
         );
         currentPosition.value = pos;
-        location = '${pos.latitude},${pos.longitude}';
-        debugPrint('Obtained position: ${pos.latitude}, ${pos.longitude}');
-
         await _updatePlacemark(pos);
 
         if (navigateOnSuccess) {
@@ -135,14 +125,9 @@ class LocalisationController extends GetxController {
     userPositionStream = null;
   }
 
-  Future<void> recheckLocationPermission() async {
-    locationServiceEnabled.value = await Geolocator.isLocationServiceEnabled();
-    locationPermission.value = await Geolocator.checkPermission();
-  }
-
   @override
   void onClose() {
-    userPositionStream?.cancel();
+    stopPositionStream();
     super.onClose();
   }
 }

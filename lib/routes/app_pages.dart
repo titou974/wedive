@@ -18,13 +18,13 @@ class AppPages {
       name: AppRoutes.onboarding,
       page: () => const OnBoardingScreen(),
       binding: OnBoardingBinding(),
-      transition: Transition.fadeIn,
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: AppRoutes.signup,
       page: () => const SignupScreen(),
       binding: SignUpBinding(),
-      transition: Transition.fadeIn,
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: AppRoutes.signupSteps,
@@ -36,7 +36,7 @@ class AppPages {
       name: AppRoutes.home,
       page: () => const NavigationMenu(),
       binding: NavigationBinding(),
-      transition: Transition.cupertino,
+      transition: Transition.fadeIn,
     ),
   ];
 }
