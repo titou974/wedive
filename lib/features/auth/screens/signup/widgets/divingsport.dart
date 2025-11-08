@@ -1,18 +1,15 @@
+import 'package:Wedive/features/auth/controllers/signup_controller.dart';
 import 'package:Wedive/utils/constants/fr_strings.dart';
 import 'package:Wedive/utils/constants/sizes.dart';
 import 'package:Wedive/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class DivingSportPage extends StatefulWidget {
   final List<String> selectedSports;
-  final Function(List<String>) onChanged;
 
-  const DivingSportPage({
-    super.key,
-    required this.selectedSports,
-    required this.onChanged,
-  });
+  const DivingSportPage({super.key, required this.selectedSports});
 
   @override
   State<DivingSportPage> createState() => _DivingSportPageState();
@@ -78,6 +75,8 @@ class _DivingSportPageState extends State<DivingSportPage> {
 
   @override
   Widget build(BuildContext context) {
+    final signupController = Get.find<SignUpController>();
+
     final dark = WeDiveHelperFunctions.isDarkMode(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,12 +103,12 @@ class _DivingSportPageState extends State<DivingSportPage> {
                   // Add to selected
                   final updated = List<String>.from(widget.selectedSports)
                     ..add(sport['name']);
-                  widget.onChanged(updated);
+                  signupController.updateSelectedSports(updated);
                 } else {
                   // Remove from selected
                   final updated = List<String>.from(widget.selectedSports)
                     ..remove(sport['name']);
-                  widget.onChanged(updated);
+                  signupController.updateSelectedSports(updated);
                 }
               });
             },

@@ -30,13 +30,13 @@ class AppPages {
       name: AppRoutes.signupSteps,
       page: () => const SignupSteps(),
       binding: SignUpBinding(),
-      transition: Transition.fadeIn,
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: AppRoutes.home,
       page: () => const NavigationMenu(),
       binding: NavigationBinding(),
-      transition: Transition.fadeIn,
+      transition: Transition.cupertino,
     ),
   ];
 }

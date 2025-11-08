@@ -6,9 +6,7 @@ import 'package:Wedive/utils/constants/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_map_animations/flutter_map_animations.dart'
-    as fm_animation;
-import 'package:flutter_map/flutter_map.dart' as fm;
+import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapController extends GetxController {
@@ -18,8 +16,7 @@ class MapController extends GetxController {
       Get.find<LocalisationController>();
   final MarkerController markerController = Get.find<MarkerController>();
 
-  fm.MapController? flutterMapController;
-  fm_animation.AnimatedMapController? animatedMapController;
+  AnimatedMapController? animatedMapController;
 
   final RxBool mapReady = false.obs;
 
@@ -57,7 +54,7 @@ class MapController extends GetxController {
     });
   }
 
-  void bindFlutterMapController(fm_animation.AnimatedMapController controller) {
+  void bindFlutterMapController(AnimatedMapController controller) {
     animatedMapController = controller;
     mapReady.value = true;
     final selected = markerController.selectedSpot.value;

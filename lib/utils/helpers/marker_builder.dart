@@ -21,10 +21,8 @@ class MarkerList {
           isSelected: isSelected,
           size: size,
           onTap: () {
-            final ctrl = Get.isRegistered<MarkerController>()
-                ? Get.find<MarkerController>()
-                : null;
-            ctrl?.selectSpot(mapItem);
+            final markerController = Get.find<MarkerController>();
+            markerController.selectSpot(mapItem);
           },
         ),
       );

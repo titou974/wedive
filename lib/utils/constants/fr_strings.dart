@@ -91,6 +91,12 @@ class WediveTextsFr {
   static const String locationPermissionSubtitle =
       'WeDive a besoin de votre position pour vous montrer les spots de plongée à proximité.';
 
+  static const String enableLocationServices =
+      'Activer les services de localisation';
+  static const String requestLocationPermission =
+      'Autoriser l\'accès à la localisation';
+  static const String openAppSettings = 'Ouvrir les paramètres';
+
   // Verify Email
 
   static const String confirmEmail = "Vérifie ton e-mail";
